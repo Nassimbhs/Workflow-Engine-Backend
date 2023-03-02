@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ public class ActiviteService {
         if (id != null && activiteRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Activite with id " + id + " already exists");
         }
+        activite.setCreationDate(new Date());
         activiteRepository.save(activite);
         return ResponseEntity.ok()
                 .body(new HashMap<String, Object>() {{
@@ -38,13 +40,15 @@ public class ActiviteService {
                     a.setDescription(activite.getDescription());
                     a.setCreationDate(activite.getCreationDate());
                     a.setTypeSortie(activite.getTypeSortie());
-
                     activiteRepository.save(a);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activite not found !");
                 });
-        return ResponseEntity.ok("Activite successfully created!");
-    }
+        return ResponseEntity.ok()
+                .body(new HashMap<String, Object>() {{
+                    put("activite", activite);
+                    put("message", "Activite successfully updated!");
+                }});    }
 
     @Transactional
     public void deleteActiviteById(Long id) {
