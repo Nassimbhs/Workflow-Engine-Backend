@@ -21,6 +21,7 @@ public class ActiviteConverter {
         dto.setName(activite.getName());
         dto.setCreationDate(activite.getCreationDate());
         dto.setDescription(activite.getDescription());
+        dto.setTypeSortie(activite.getTypeSortie());
         dto.setTacheDtoList(tacheConverter.entityToDto(activite.getTaches()));
         return dto;
     }
