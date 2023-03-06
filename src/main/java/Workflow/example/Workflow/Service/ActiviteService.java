@@ -39,7 +39,7 @@ public class ActiviteService {
                     a.setName(activite.getName());
                     a.setDescription(activite.getDescription());
                     a.setCreationDate(activite.getCreationDate());
-                    a.setTypeSortie(activite.getTypeSortie());
+                    a.setTarget(activite.getTarget());
                     activiteRepository.save(a);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activite not found !");

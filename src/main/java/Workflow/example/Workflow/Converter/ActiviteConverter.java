@@ -15,14 +15,17 @@ public class ActiviteConverter {
 
     @Autowired
     private TacheConverter tacheConverter;
+    @Autowired
+    private LienActiviteConverter lienActiviteConverter;
     public ActiviteDto entityToDto(Activite activite){
         ActiviteDto dto = new ActiviteDto();
         dto.setId(activite.getId());
         dto.setName(activite.getName());
         dto.setCreationDate(activite.getCreationDate());
         dto.setDescription(activite.getDescription());
-        dto.setTypeSortie(activite.getTypeSortie());
+        dto.setTarget(activite.getTarget());
         dto.setTacheDtoList(tacheConverter.entityToDto(activite.getTaches()));
+        dto.setLienActiviteDtos(lienActiviteConverter.entityToDto(activite.getLienActivites()));
         return dto;
     }
     public List<ActiviteDto> entityToDto(List<Activite> activites)

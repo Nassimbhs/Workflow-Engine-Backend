@@ -1,5 +1,6 @@
 package Workflow.example.Workflow.Service;
 
+import Workflow.example.Workflow.Entity.Activite;
 import Workflow.example.Workflow.Entity.Workflow;
 import Workflow.example.Workflow.Repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,9 @@ public class WorkflowService {
                 .body(new HashMap<String, Object>() {{
                     put("workflow", workflow);
                     put("message", "Workflow successfully created!");
-                }});     }
+                }});
+    }
+
     @Transactional
     public ResponseEntity<Object> updateWorkflow(Long id, Workflow workflow) {
         workflowRepository.findById(id).ifPresentOrElse(
