@@ -2,7 +2,6 @@ package Workflow.example.Workflow.Service;
 
 import Workflow.example.Workflow.Entity.Activite;
 import Workflow.example.Workflow.Repository.ActiviteRepository;
-import Workflow.example.Workflow.Repository.ResponsableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +38,6 @@ public class ActiviteService {
                     a.setName(activite.getName());
                     a.setDescription(activite.getDescription());
                     a.setCreationDate(activite.getCreationDate());
-                    a.setTarget(activite.getTarget());
                     activiteRepository.save(a);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activite not found !");

@@ -1,16 +1,15 @@
 package Workflow.example.Workflow.Entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
-public class Activite {
+public class Activite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +17,6 @@ public class Activite {
     private String name;
     private String description;
     private Date creationDate;
-    private String target;
 
     @ManyToOne
     private Workflow workflowActivite;

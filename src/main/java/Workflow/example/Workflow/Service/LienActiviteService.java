@@ -1,5 +1,6 @@
 package Workflow.example.Workflow.Service;
 
+import Workflow.example.Workflow.DTO.LienActiviteDto;
 import Workflow.example.Workflow.Entity.Activite;
 import Workflow.example.Workflow.Entity.LienActivite;
 import Workflow.example.Workflow.Repository.ActiviteRepository;
@@ -30,15 +31,22 @@ public class LienActiviteService {
         if (!activite.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "activity with id " + lienActivite.getId() + " not found");
         }
-
         // Set the activity property of the link to the corresponding activity
         lienActivite.setActiviteLien(activite.get());
 
         // Save the link to the repository
         lienActiviteRepository.save(lienActivite);
+        LienActiviteDto lienActiviteDTO = new LienActiviteDto();
+        lienActiviteDTO.setId(lienActivite.getId());
+        lienActiviteDTO.setSource(lienActivite.getSource());
+        lienActiviteDTO.setTarget(lienActivite.getTarget());
 
-        // Return a response indicating that the link was successfully created
-        return ResponseEntity.ok("Link successfully created!");
+        // Return a JSON response
+        return ResponseEntity.ok()
+                .body(new HashMap<String, Object>() {{
+                    put("LienActivite", lienActiviteDTO);
+                    put("message", "Link successfully created!");
+                }});
     }
     @Transactional
     public ResponseEntity<Object> updateLink(Long id, LienActivite lienActivite) {

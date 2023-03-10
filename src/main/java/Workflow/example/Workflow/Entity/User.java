@@ -2,9 +2,11 @@ package Workflow.example.Workflow.Entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.io.Serializable;
+
 @Entity
 @Data
-public class User {
+public class User  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

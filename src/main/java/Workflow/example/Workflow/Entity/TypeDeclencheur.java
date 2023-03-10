@@ -3,12 +3,13 @@ package Workflow.example.Workflow.Entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
-public class TypeDeclencheur {
+public class TypeDeclencheur  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
