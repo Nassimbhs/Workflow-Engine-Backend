@@ -15,7 +15,9 @@ public class LienActivite implements Serializable {
     private Long id;
     private String source ;
     private String target ;
-
+    private String workflowId;
+    private String activiteSourceName;
+    private String activiteTargetName;
     @ManyToOne
     private Activite activiteLien;
 }

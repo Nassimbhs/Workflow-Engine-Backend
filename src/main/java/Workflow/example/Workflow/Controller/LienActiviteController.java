@@ -10,8 +10,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -117,6 +120,27 @@ public class LienActiviteController {
     )
     public LienActiviteDto findLinkById(@PathVariable Long id) {
         return lienActiviteConverter.entityToDto(lienActiviteService.findLinkById(id));
+    }
+
+
+
+    @GetMapping("/getLinkActivite/{id}")
+    @Operation(
+            summary = "Find link",
+            description = "Find link by id.",
+            tags = { "LienActivite" },
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienActiviteDto.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<LienActiviteDto> findByActiviteIdWithActiviteLiee(@PathVariable Long id) {
+        return lienActiviteConverter.entityToDto(lienActiviteService.findByActiviteIdWithActiviteLiee(id));
     }
 
 }

@@ -40,7 +40,9 @@ public class LienActiviteService {
         lienActiviteDTO.setId(lienActivite.getId());
         lienActiviteDTO.setSource(lienActivite.getSource());
         lienActiviteDTO.setTarget(lienActivite.getTarget());
-
+        lienActiviteDTO.setWorkflowId(lienActivite.getWorkflowId());
+        lienActiviteDTO.setActiviteSourceName(lienActivite.getActiviteSourceName());
+        lienActiviteDTO.setActiviteTargetName(lienActivite.getActiviteTargetName());
         // Return a JSON response
         return ResponseEntity.ok()
                 .body(new HashMap<String, Object>() {{
@@ -84,6 +86,7 @@ public class LienActiviteService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Link not found");
         }
     }
-
-
+    public  List<LienActivite> findByActiviteIdWithActiviteLiee(Long activiteId){
+        return lienActiviteRepository.findByActiviteIdWithActiviteLiee(activiteId);
+    }
 }

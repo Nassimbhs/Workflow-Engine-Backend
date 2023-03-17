@@ -2,6 +2,7 @@ package Workflow.example.Workflow.Service;
 
 import Workflow.example.Workflow.Entity.Activite;
 import Workflow.example.Workflow.Entity.Workflow;
+import Workflow.example.Workflow.Repository.ActiviteRepository;
 import Workflow.example.Workflow.Repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,16 +11,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class WorkflowService {
 
     @Autowired
     private WorkflowRepository workflowRepository;
+    @Autowired
+    private ActiviteRepository activiteRepository;
 
     @Transactional
     public ResponseEntity<Object> addWorkflow(Workflow workflow) {
@@ -29,11 +29,26 @@ public class WorkflowService {
         }
         workflow.setCreationDate(new Date());
         workflowRepository.save(workflow);
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("workflow", workflow);
-                    put("message", "Workflow successfully created!");
-                }});
+
+        // create two default activities for the new workflow
+        Activite activity1 = new Activite();
+        activity1.setName("Départ");
+        activity1.setDescription("Default activity 1");
+        activity1.setCreationDate(new Date());
+        activity1.setWorkflowActivite(workflow);
+        activiteRepository.save(activity1);
+
+        Activite activity2 = new Activite();
+        activity2.setName("Fin");
+        activity2.setDescription("Default activity 2");
+        activity2.setCreationDate(new Date());
+        activity2.setWorkflowActivite(workflow);
+        activiteRepository.save(activity2);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("workflow", workflow);
+        response.put("message", "Workflow successfully created!");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional

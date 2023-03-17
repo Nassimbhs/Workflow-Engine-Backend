@@ -17,6 +17,9 @@ public class LienActiviteConverter {
         dto.setId(lienActivite.getId());
         dto.setSource(lienActivite.getSource());
         dto.setTarget(lienActivite.getTarget());
+        dto.setWorkflowId(lienActivite.getWorkflowId());
+        dto.setActiviteSourceName(lienActivite.getActiviteSourceName());
+        dto.setActiviteTargetName(lienActivite.getActiviteTargetName());
         return dto;
     }
     public List<LienActiviteDto> entityToDto(List<LienActivite> lienActivites)
