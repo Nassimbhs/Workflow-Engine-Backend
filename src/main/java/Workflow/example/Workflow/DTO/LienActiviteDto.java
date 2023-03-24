@@ -13,5 +13,6 @@ public class LienActiviteDto implements Serializable {
     private String workflowId;
     private String activiteSourceName;
     private String activiteTargetName;
+    private String type;
 
 }

@@ -18,6 +18,8 @@ public class LienActivite implements Serializable {
     private String workflowId;
     private String activiteSourceName;
     private String activiteTargetName;
+    private String type;
+
     @ManyToOne
     private Activite activiteLien;
 }

@@ -56,6 +56,7 @@ public class LienActiviteService {
                 a -> {
                     a.setSource(lienActivite.getSource());
                     a.setTarget(lienActivite.getTarget());
+                    a.setType(lienActivite.getType());
                     lienActiviteRepository.save(a);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Link not found !");

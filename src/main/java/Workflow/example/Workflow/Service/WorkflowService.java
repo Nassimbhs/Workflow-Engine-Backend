@@ -32,7 +32,7 @@ public class WorkflowService {
 
         // create two default activities for the new workflow
         Activite activity1 = new Activite();
-        activity1.setName("Départ");
+        activity1.setName("Début");
         activity1.setDescription("Default activity 1");
         activity1.setCreationDate(new Date());
         activity1.setWorkflowActivite(workflow);
