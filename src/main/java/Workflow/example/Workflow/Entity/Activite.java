@@ -17,7 +17,8 @@ public class Activite implements Serializable {
     private String name;
     private String description;
     private Date creationDate;
-
+    private Date startDate;
+    private Date endDate;
     @ManyToOne
     private Workflow workflowActivite;
 

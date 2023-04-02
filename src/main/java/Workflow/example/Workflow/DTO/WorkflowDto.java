@@ -15,6 +15,7 @@ public class WorkflowDto {
     private Date creationDate;
     private Date lastModifiedDate;
     private String etat;
+    private String declencheur;
 
     private List<TypeDeclencheurDto> typeDeclencheurDtoList = new ArrayList<TypeDeclencheurDto>();
     private List<ActiviteDto> activiteDtoList = new ArrayList<ActiviteDto>();

@@ -1,7 +1,6 @@
 package Workflow.example.Workflow.Entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -20,4 +19,5 @@ public class Tache  implements Serializable {
 
     @ManyToOne
     private Workflow workflowTache;
+
 }

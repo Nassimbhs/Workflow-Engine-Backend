@@ -14,6 +14,8 @@ public class ActiviteDto implements Serializable {
     private String name;
     private String description;
     private Date creationDate;
+    private Date startDate;
+    private Date endDate;
 
     private List<TacheDto> tacheDtoList = new ArrayList<TacheDto>();
     private List<LienActiviteDto> lienActiviteDtos = new ArrayList<LienActiviteDto>();

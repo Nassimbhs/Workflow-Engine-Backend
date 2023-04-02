@@ -30,6 +30,7 @@ public class WorkflowConverter {
         dto.setEtat(workflow.getEtat());
         dto.setCreationDate(workflow.getCreationDate());
         dto.setLastModifiedDate(workflow.getLastModifiedDate());
+        dto.setDeclencheur(workflow.getDeclencheur());
         dto.setTypeDeclencheurDtoList(typeDeclencheurConverter.entityToDto(workflow.getTypeDeclencheurs()));
         dto.setActiviteDtoList(activiteConverter.entityToDto(workflow.getActivites()));
         dto.setResponsableDtoList(responsableConverter.entityToDto(workflow.getResponsables()));

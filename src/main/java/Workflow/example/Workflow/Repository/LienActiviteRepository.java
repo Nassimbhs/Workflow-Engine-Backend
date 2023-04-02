@@ -13,4 +13,5 @@ public interface LienActiviteRepository extends JpaRepository<LienActivite,Long>
     @Query("SELECT la FROM LienActivite la JOIN la.activiteLien a WHERE a.id = :activiteId")
     List<LienActivite> findByActiviteIdWithActiviteLiee(@Param("activiteId") Long activiteId);
 
+
 }

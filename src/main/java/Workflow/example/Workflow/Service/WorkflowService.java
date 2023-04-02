@@ -59,6 +59,7 @@ public class WorkflowService {
                     w.setDescription(workflow.getDescription());
                     w.setEtat(workflow.getEtat());
                     w.setLastModifiedDate(new Date());
+                    w.setDeclencheur(workflow.getDeclencheur());
                     workflowRepository.save(w);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workflow not found !");

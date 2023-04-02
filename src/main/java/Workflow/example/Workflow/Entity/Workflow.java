@@ -22,6 +22,7 @@ public class Workflow implements Serializable {
     private Date creationDate;
     private Date lastModifiedDate;
     private String etat;
+    private String declencheur;
 
     @OneToMany(mappedBy = "workflowTypeDeclencheur", cascade = CascadeType.ALL)
     private List<TypeDeclencheur> typeDeclencheurs = new ArrayList<>();
