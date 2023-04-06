@@ -17,8 +17,5 @@ public class WorkflowDto {
     private String etat;
     private String declencheur;
 
-    private List<TypeDeclencheurDto> typeDeclencheurDtoList = new ArrayList<TypeDeclencheurDto>();
-    private List<ActiviteDto> activiteDtoList = new ArrayList<ActiviteDto>();
-    private List<ResponsableDto> responsableDtoList = new ArrayList<ResponsableDto>();
-
+    private List<TacheDto> tacheDtoList = new ArrayList<TacheDto>();
 }

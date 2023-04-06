@@ -10,16 +10,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class WorkflowConverter {
-
-
     @Autowired
-    private TypeDeclencheurConverter typeDeclencheurConverter;
-
-    @Autowired
-    private ActiviteConverter activiteConverter;
-
-    @Autowired
-    private ResponsableConverter responsableConverter;
+    private TacheConverter tacheConverter;
 
     public WorkflowDto entityToDto(Workflow workflow){
 
@@ -31,9 +23,7 @@ public class WorkflowConverter {
         dto.setCreationDate(workflow.getCreationDate());
         dto.setLastModifiedDate(workflow.getLastModifiedDate());
         dto.setDeclencheur(workflow.getDeclencheur());
-        dto.setTypeDeclencheurDtoList(typeDeclencheurConverter.entityToDto(workflow.getTypeDeclencheurs()));
-        dto.setActiviteDtoList(activiteConverter.entityToDto(workflow.getActivites()));
-        dto.setResponsableDtoList(responsableConverter.entityToDto(workflow.getResponsables()));
+        dto.setTacheDtoList(tacheConverter.entityToDto(workflow.getTaches()));
         return dto;
     }
 

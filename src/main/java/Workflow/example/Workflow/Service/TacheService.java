@@ -1,56 +1,60 @@
 package Workflow.example.Workflow.Service;
 
-import Workflow.example.Workflow.Entity.Activite;
 import Workflow.example.Workflow.Entity.Tache;
+import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.TacheRepository;
+import Workflow.example.Workflow.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TacheService {
-
-
     @Autowired
-    private TacheRepository tacheRepository;
+    TacheRepository tacheRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public ResponseEntity<Object> addTache(Tache tache) {
-        tacheRepository
-                .findById(tache.getId())
-                .ifPresentOrElse(
-                        x -> {
-                            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache id already exit !");
-                        },
-                        () -> {
-                            tacheRepository.save(tache);
-                        });
-
-        return ResponseEntity.accepted().body("Tache successfully Created !");
+        Long id = tache.getId();
+        if (id != null && tacheRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Tache with id " + id + " already exists");
+        }
+        tache.setCreationDate(new Date());
+        tacheRepository.save(tache);
+        return ResponseEntity.ok()
+                .body(new HashMap<String, Object>() {{
+                    put("Tache", tache);
+                    put("message", "Tache successfully created!");
+                }});
     }
 
     @Transactional
     public ResponseEntity<Object> updateTache(Long id, Tache tache) {
         tacheRepository.findById(id).ifPresentOrElse(
-                t -> {
-                    t.setName(tache.getName());
-                    t.setEtat(tache.getEtat());
-                    t.setStartDate(tache.getStartDate());
-                    t.setEndDate(tache.getEndDate());
-                    t.setPriorite(tache.getPriorite());
-
-                    tacheRepository.save(t);
+                a -> {
+                    a.setName(tache.getName());
+                    a.setDescription(tache.getDescription());
+                    a.setCreationDate(tache.getCreationDate());
+                    a.setStartDate(tache.getStartDate());
+                    a.setEndDate(tache.getEndDate());
+                    tacheRepository.save(a);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache not found !");
                 });
-        return ResponseEntity.accepted().body("Tache successfully updated !");
-    }
+        return ResponseEntity.ok()
+                .body(new HashMap<String, Object>() {{
+                    put("tache", tache);
+                    put("message", "Tache successfully updated!");
+                }});    }
 
     @Transactional
     public void deleteTacheById(Long id) {
@@ -60,17 +64,30 @@ public class TacheService {
         tacheRepository.delete(tache);
     }
 
-    public List<Tache> getAllTache() {
+    public List<Tache> getAlltaches() {
         return (List<Tache>) tacheRepository.findAll();
     }
 
-    public Tache findTacheById(Long id) {
+    public Tache findtacheById(Long id) {
         Optional<Tache> tacheOptional = tacheRepository.findById(id);
         if (tacheOptional.isPresent()) {
             return tacheOptional.get();
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache not found !");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache not found");
         }
     }
 
+    public List<Tache> findByWorkflowId(Long id) {
+        return tacheRepository.findByWorkflowId(id);
+    }
+
+    public Tache assignUsersToTache(Long tacheId, Set<Long> userIds) {
+        Tache tache = tacheRepository.findById(tacheId)
+                .orElseThrow(() -> new EntityNotFoundException("Tache not found"));
+        Set<User> users = userRepository.findAllById(userIds)
+                .stream()
+                .collect(Collectors.toSet());
+        tache.setUsers(users);
+        return tacheRepository.save(tache);
+    }
 }

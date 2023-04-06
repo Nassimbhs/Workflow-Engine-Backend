@@ -1,8 +1,8 @@
 package Workflow.example.Workflow.Service;
 
-import Workflow.example.Workflow.Entity.Activite;
+import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.Workflow;
-import Workflow.example.Workflow.Repository.ActiviteRepository;
+import Workflow.example.Workflow.Repository.TacheRepository;
 import Workflow.example.Workflow.Repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class WorkflowService {
     @Autowired
     private WorkflowRepository workflowRepository;
     @Autowired
-    private ActiviteRepository activiteRepository;
+    private TacheRepository tacheRepository;
 
     @Transactional
     public ResponseEntity<Object> addWorkflow(Workflow workflow) {
@@ -31,19 +31,19 @@ public class WorkflowService {
         workflowRepository.save(workflow);
 
         // create two default activities for the new workflow
-        Activite activity1 = new Activite();
+        Tache activity1 = new Tache();
         activity1.setName("Début");
         activity1.setDescription("Default activity 1");
         activity1.setCreationDate(new Date());
-        activity1.setWorkflowActivite(workflow);
-        activiteRepository.save(activity1);
+        activity1.setWorkflowTache(workflow);
+        tacheRepository.save(activity1);
 
-        Activite activity2 = new Activite();
+        Tache activity2 = new Tache();
         activity2.setName("Fin");
         activity2.setDescription("Default activity 2");
         activity2.setCreationDate(new Date());
-        activity2.setWorkflowActivite(workflow);
-        activiteRepository.save(activity2);
+        activity2.setWorkflowTache(workflow);
+        tacheRepository.save(activity2);
 
         Map<String, Object> response = new HashMap<>();
         response.put("workflow", workflow);

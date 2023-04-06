@@ -2,7 +2,6 @@ package Workflow.example.Workflow.Controller;
 
 import Workflow.example.Workflow.Converter.TacheConverter;
 import Workflow.example.Workflow.DTO.TacheDto;
-import Workflow.example.Workflow.Entity.Activite;
 import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Service.TacheService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,12 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+
 
 @RestController
 @RequestMapping("/api/v1/Tache")
 @Tag(name = "Tache", description = "CRUD Tache")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TacheController {
-
 
     @Autowired
     private TacheService tacheService;
@@ -62,7 +63,7 @@ public class TacheController {
             }
     )
     public ResponseEntity<Object> updateTache(@PathVariable Long id, @RequestBody Tache tache) {
-        return  tacheService.updateTache(id,tache);
+        return  tacheService.updateTache(id, tache);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -100,7 +101,7 @@ public class TacheController {
             }
     )
     public List<TacheDto> findAll() {
-        return  tacheConverter.entityToDto(tacheService.getAllTache());
+        return  tacheConverter.entityToDto(tacheService.getAlltaches());
     }
 
     @GetMapping("/getTache/{id}")
@@ -119,7 +120,45 @@ public class TacheController {
             }
     )
     public TacheDto findTacheById(@PathVariable Long id) {
-        return tacheConverter.entityToDto(tacheService.findTacheById(id));
+        return tacheConverter.entityToDto(tacheService.findtacheById(id));
     }
 
+    @GetMapping("/taches/{id}")
+    @Operation(
+            summary = "Find Tache by workflow id",
+            description = "Find Tache by workflow id.",
+            tags = { "Tache" },
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = TacheDto.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+
+    public List<TacheDto> findByWorkflowId(@PathVariable Long id) {
+        return tacheConverter.entityToDto(tacheService.findByWorkflowId(id));
+    }
+
+    @PostMapping("users/{tacheId}/")
+    @Operation(
+            summary = "Assign User to task",
+            description = "Assign User to task.",
+            tags = { "Tache" },
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Tache.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+    public Tache assignUsersToTache(@PathVariable Long tacheId, @RequestBody Set<Long> userIds) {
+        return tacheService.assignUsersToTache(tacheId, userIds);
+    }
 }

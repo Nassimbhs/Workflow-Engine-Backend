@@ -1,68 +1,66 @@
 package Workflow.example.Workflow.Controller;
 
-import Workflow.example.Workflow.Converter.LienActiviteConverter;
-import Workflow.example.Workflow.DTO.LienActiviteDto;
-import Workflow.example.Workflow.Entity.LienActivite;
-import Workflow.example.Workflow.Service.LienActiviteService;
+import Workflow.example.Workflow.Converter.LienTacheConverter;
+import Workflow.example.Workflow.DTO.LienTacheDto;
+import Workflow.example.Workflow.Entity.LienTache;
+import Workflow.example.Workflow.Service.LienTacheService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/LienActivite")
-@Tag(name = "LienActivite", description = "CRUD LienActivite")
+@RequestMapping("/api/v1/LienTache")
+@Tag(name = "LienTache", description = "CRUD LienTache")
 @CrossOrigin(origins = "http://localhost:4200")
-public class LienActiviteController {
+public class LienTacheController {
     @Autowired
-    private LienActiviteConverter lienActiviteConverter;
+    private LienTacheConverter lienTacheConverter;
     @Autowired
-    private LienActiviteService lienActiviteService;
+    private LienTacheService lienTacheService;
 
     @PostMapping("/addlink/")
     @Operation(
             summary = "add link",
             description = "create link.",
-            tags = { "LienActivite" },
+            tags = { "LienTache" },
             responses = {
                     @ApiResponse(
                             description = "Success",
                             responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienActivite.class))
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienTache.class))
                     ),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<Object> addlink(@RequestBody LienActivite lienActivite){
-        return lienActiviteService.addLink(lienActivite);
+    public ResponseEntity<Object> addlink(@RequestBody LienTache lienTache){
+        return lienTacheService.addLink(lienTache);
     }
 
     @PutMapping("/update/{id}")
     @Operation(
             summary = "Update link",
             description = "Update a link by id.",
-            tags = { "LienActivite" },
+            tags = { "LienTache" },
             responses = {
                     @ApiResponse(
                             description = "Success",
                             responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienActivite.class))
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienTache.class))
                     ),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<Object> updateLink(@PathVariable Long id, @RequestBody LienActivite lienActivite) {
-        return  lienActiviteService.updateLink(id,lienActivite);
+    public ResponseEntity<Object> updateLink(@PathVariable Long id, @RequestBody LienTache lienTache) {
+        return  lienTacheService.updateLink(id,lienTache);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -74,73 +72,73 @@ public class LienActiviteController {
                     @ApiResponse(
                             description = "Success",
                             responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienActivite.class))
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienTache.class))
                     ),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
     public void deleteLink(@PathVariable Long id) {
-        lienActiviteService.deleteLinkById(id);
+        lienTacheService.deleteLinkById(id);
     }
 
     @GetMapping("/allLinks/")
     @Operation(
             summary = "Find all links",
             description = "Find all links.",
-            tags = { "LienActivite" },
+            tags = { "LienTache" },
             responses = {
                     @ApiResponse(
                             description = "Success",
                             responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienActiviteDto.class))
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienTacheDto.class))
                     ),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public List<LienActiviteDto> findAll() {
-        return  lienActiviteConverter.entityToDto(lienActiviteService.getAllLinks());
+    public List<LienTacheDto> findAll() {
+        return  lienTacheConverter.entityToDto(lienTacheService.getAllLinks());
     }
 
     @GetMapping("/getLink/{id}")
     @Operation(
             summary = "Find link",
             description = "Find link by id.",
-            tags = { "LienActivite" },
+            tags = { "LienTache" },
             responses = {
                     @ApiResponse(
                             description = "Success",
                             responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienActiviteDto.class))
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienTacheDto.class))
                     ),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public LienActiviteDto findLinkById(@PathVariable Long id) {
-        return lienActiviteConverter.entityToDto(lienActiviteService.findLinkById(id));
+    public LienTacheDto findLinkById(@PathVariable Long id) {
+        return lienTacheConverter.entityToDto(lienTacheService.findLinkById(id));
     }
 
 
 
-    @GetMapping("/getLinkActivite/{id}")
+    @GetMapping("/getLinkTache/{id}")
     @Operation(
             summary = "Find link",
             description = "Find link by id.",
-            tags = { "LienActivite" },
+            tags = { "LienTache" },
             responses = {
                     @ApiResponse(
                             description = "Success",
                             responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienActiviteDto.class))
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = LienTacheDto.class))
                     ),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public List<LienActiviteDto> findByActiviteIdWithActiviteLiee(@PathVariable Long id) {
-        return lienActiviteConverter.entityToDto(lienActiviteService.findByActiviteIdWithActiviteLiee(id));
+    public List<LienTacheDto> findByTacheIdWithTacheLiee(@PathVariable Long id) {
+        return lienTacheConverter.entityToDto(lienTacheService.findByTacheIdWithTacheLiee(id));
     }
 
 }

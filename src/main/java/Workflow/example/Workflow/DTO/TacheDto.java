@@ -2,15 +2,21 @@ package Workflow.example.Workflow.DTO;
 
 import lombok.Data;
 
-@Data
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-public class TacheDto {
+@Data
+public class TacheDto implements Serializable {
 
     private Long id;
     private String name;
-    private String startDate;
-    private String endDate;
-    private String etat;
-    private String priorite;
+    private String description;
+    private Date creationDate;
+    private Date startDate;
+    private Date endDate;
+
+    private List<LienTacheDto> lienTacheDtos = new ArrayList<LienTacheDto>();
 
 }
