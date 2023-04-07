@@ -1,6 +1,8 @@
 package Workflow.example.Workflow.Entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -39,7 +41,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @ManyToMany(mappedBy = "users")
-    private Set<Tache> taches = new HashSet<>();
+    private List<Tache> taches = new ArrayList<>();
 
     public User() {
     }

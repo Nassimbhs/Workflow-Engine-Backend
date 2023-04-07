@@ -65,7 +65,7 @@ public class TacheService {
     }
 
     public List<Tache> getAlltaches() {
-        return (List<Tache>) tacheRepository.findAll();
+        return tacheRepository.findAll();
     }
 
     public Tache findtacheById(Long id) {
@@ -87,7 +87,7 @@ public class TacheService {
         Set<User> users = userRepository.findAllById(userIds)
                 .stream()
                 .collect(Collectors.toSet());
-        tache.setUsers(users);
+        tache.setUsers((List<User>) users);
         return tacheRepository.save(tache);
     }
 }

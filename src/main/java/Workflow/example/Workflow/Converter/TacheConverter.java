@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 public class TacheConverter {
     @Autowired
     private LienTacheConverter lienTacheConverter;
+
+    @Autowired
+    private UserConverter userConverter;
+
     public TacheDto entityToDto(Tache tache){
         TacheDto dto = new TacheDto();
         dto.setId(tache.getId());
@@ -21,6 +25,8 @@ public class TacheConverter {
         dto.setStartDate(tache.getStartDate());
         dto.setEndDate(tache.getEndDate());
         dto.setLienTacheDtos(lienTacheConverter.entityToDto(tache.getLienTaches()));
+        dto.setUserDtoList(userConverter.entityToDto(tache.getUsers()));
+
         return dto;
     }
     public List<TacheDto> entityToDto(List<Tache> taches)

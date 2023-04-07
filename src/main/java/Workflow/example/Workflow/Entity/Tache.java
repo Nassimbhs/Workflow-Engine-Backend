@@ -29,5 +29,5 @@ public class Tache implements Serializable {
             joinColumns = @JoinColumn(name = "tache_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> users = new HashSet<>();
+    private List<User> users = new ArrayList<>();
 }

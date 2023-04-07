@@ -1,5 +1,6 @@
 package Workflow.example.Workflow.DTO;
 
+import Workflow.example.Workflow.Entity.User;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,5 +19,6 @@ public class TacheDto implements Serializable {
     private Date endDate;
 
     private List<LienTacheDto> lienTacheDtos = new ArrayList<LienTacheDto>();
+    private List<UserDto> userDtoList = new ArrayList<UserDto>();
 
 }
