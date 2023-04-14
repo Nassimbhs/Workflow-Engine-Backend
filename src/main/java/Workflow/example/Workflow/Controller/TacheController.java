@@ -177,4 +177,10 @@ public class TacheController {
         return userConverter.entityToDto(tacheService.getUtilisateursDeTache(tacheId));
     }
 
+    @DeleteMapping("/{tacheId}/utilisateurs/{userId}")
+    public ResponseEntity<Void> desassignerTacheAUtilisateur(@PathVariable Long tacheId, @PathVariable Long userId) {
+        tacheService.desassignerTacheAUtilisateur(tacheId, userId);
+        return ResponseEntity.ok().build();
+    }
+
 }

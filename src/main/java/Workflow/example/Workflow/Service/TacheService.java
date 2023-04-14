@@ -92,9 +92,22 @@ public class TacheService {
         if (users.size() != userIds.size()) {
             throw new EntityNotFoundException("Un ou plusieurs des utilisateurs n'existent pas");
         }
-
         for (User user : users) {
-            user.getTaches().add(tache);
+            if (!user.getTaches().contains(tache)) {
+                user.getTaches().add(tache);
+                userRepository.save(user);
+            }
+        }
+    }
+
+    public void desassignerTacheAUtilisateur(Long tacheId, Long userId) {
+        Tache tache = tacheRepository.findById(tacheId)
+                .orElseThrow(() -> new EntityNotFoundException("La tâche avec l'id " + tacheId + " n'existe pas"));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("L'utilisateur avec l'id " + userId + " n'existe pas"));
+
+        if (user.getTaches().remove(tache)) {
             userRepository.save(user);
         }
     }
