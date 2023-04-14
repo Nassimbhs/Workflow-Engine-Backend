@@ -1,8 +1,11 @@
 package Workflow.example.Workflow.Controller;
 
 import Workflow.example.Workflow.Converter.TacheConverter;
+import Workflow.example.Workflow.Converter.UserConverter;
 import Workflow.example.Workflow.DTO.TacheDto;
+import Workflow.example.Workflow.DTO.UserDto;
 import Workflow.example.Workflow.Entity.Tache;
+import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.TacheRepository;
 import Workflow.example.Workflow.Service.TacheService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +32,8 @@ public class TacheController {
     private TacheService tacheService;
     @Autowired
     private TacheConverter tacheConverter;
+    @Autowired
+    private UserConverter userConverter;
     @Autowired
     private TacheRepository tacheRepository;
 
@@ -166,4 +171,10 @@ public class TacheController {
         tacheService.assignerTacheAUtilisateurs(tacheId, userIds);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/{id}/utilisateurs")
+    public List<UserDto> getUtilisateursDeTache(@PathVariable("id") long tacheId) {
+        return userConverter.entityToDto(tacheService.getUtilisateursDeTache(tacheId));
+    }
+
 }

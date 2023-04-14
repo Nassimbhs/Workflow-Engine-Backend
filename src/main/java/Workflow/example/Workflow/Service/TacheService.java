@@ -99,4 +99,9 @@ public class TacheService {
         }
     }
 
+    public List<User> getUtilisateursDeTache(long tacheId) {
+        Tache tache = tacheRepository.findById(tacheId);
+        return tache.getUserList();
+    }
+
 }

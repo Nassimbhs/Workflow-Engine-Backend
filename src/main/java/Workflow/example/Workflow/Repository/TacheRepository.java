@@ -13,4 +13,6 @@ public interface TacheRepository extends JpaRepository<Tache,Long> {
     @Query("SELECT a FROM Tache a WHERE a.workflowTache.id = :id")
     List<Tache> findByWorkflowId(@Param("id") Long id);
 
+    Tache findById(long id);
+
 }
