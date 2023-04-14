@@ -1,7 +1,6 @@
 package Workflow.example.Workflow.DTO;
 
 import lombok.Data;
-
 import java.io.Serializable;
 
 @Data

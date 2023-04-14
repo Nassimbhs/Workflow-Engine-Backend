@@ -1,6 +1,5 @@
 package Workflow.example.Workflow.DTO;
 
-import Workflow.example.Workflow.Entity.User;
 import lombok.Data;
 
 import java.io.Serializable;

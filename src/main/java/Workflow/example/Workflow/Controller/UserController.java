@@ -43,8 +43,8 @@ public class UserController {
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public List<User> findAll() {
-        return userService.getAllUsers();
+    public List<UserDto> findAll() {
+        return userConverter.entityToDto(userService.getAllUsers());
     }
 
 }

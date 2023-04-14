@@ -1,7 +1,9 @@
 package Workflow.example.Workflow.Converter;
 
 import Workflow.example.Workflow.DTO.TacheDto;
+import Workflow.example.Workflow.DTO.UserDto;
 import Workflow.example.Workflow.Entity.Tache;
+import Workflow.example.Workflow.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +27,7 @@ public class TacheConverter {
         dto.setStartDate(tache.getStartDate());
         dto.setEndDate(tache.getEndDate());
         dto.setLienTacheDtos(lienTacheConverter.entityToDto(tache.getLienTaches()));
-        dto.setUserDtoList(userConverter.entityToDto(tache.getUsers()));
-
+        dto.setUserDtoList(userConverter.entityToDto(tache.getUserList()));
         return dto;
     }
     public List<TacheDto> entityToDto(List<Tache> taches)

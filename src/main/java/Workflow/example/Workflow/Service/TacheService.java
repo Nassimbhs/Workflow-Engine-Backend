@@ -1,5 +1,7 @@
 package Workflow.example.Workflow.Service;
 
+import Workflow.example.Workflow.Converter.TacheConverter;
+import Workflow.example.Workflow.DTO.TacheDto;
 import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.TacheRepository;
@@ -13,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class TacheService {
@@ -22,6 +23,8 @@ public class TacheService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TacheConverter tacheConverter;
     @Transactional
     public ResponseEntity<Object> addTache(Tache tache) {
         Long id = tache.getId();
@@ -54,7 +57,8 @@ public class TacheService {
                 .body(new HashMap<String, Object>() {{
                     put("tache", tache);
                     put("message", "Tache successfully updated!");
-                }});    }
+                }});
+    }
 
     @Transactional
     public void deleteTacheById(Long id) {
@@ -81,13 +85,18 @@ public class TacheService {
         return tacheRepository.findByWorkflowId(id);
     }
 
-    public Tache assignUsersToTache(Long tacheId, Set<Long> userIds) {
-        Tache tache = tacheRepository.findById(tacheId)
-                .orElseThrow(() -> new EntityNotFoundException("Tache not found"));
-        Set<User> users = userRepository.findAllById(userIds)
-                .stream()
-                .collect(Collectors.toSet());
-        tache.setUsers((List<User>) users);
-        return tacheRepository.save(tache);
+    public void assignerTacheAUtilisateurs(Long tacheId, List<Long> userIds) {
+        Tache tache = tacheRepository.findById(tacheId).orElseThrow(() -> new EntityNotFoundException("La tâche avec l'id " + tacheId + " n'existe pas"));
+
+        List<User> users = userRepository.findAllById(userIds);
+        if (users.size() != userIds.size()) {
+            throw new EntityNotFoundException("Un ou plusieurs des utilisateurs n'existent pas");
+        }
+
+        for (User user : users) {
+            user.getTaches().add(tache);
+            userRepository.save(user);
+        }
     }
+
 }
