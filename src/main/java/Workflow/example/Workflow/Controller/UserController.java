@@ -67,7 +67,6 @@ public class UserController {
         return  userService.updateUser(id,user);
     }
 
-
     @GetMapping("/getUser/{id}")
     @Operation(
             summary = "Find user",

@@ -1,19 +1,18 @@
 package Workflow.example.Workflow.Service;
 
 import Workflow.example.Workflow.Converter.TacheConverter;
-import Workflow.example.Workflow.DTO.TacheDto;
 import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.TacheRepository;
 import Workflow.example.Workflow.Repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.util.*;
 
 @Service

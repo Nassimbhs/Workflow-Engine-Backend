@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
 
 import Workflow.example.Workflow.Configuration.JwtUtils;
 import Workflow.example.Workflow.Configuration.Payload.JwtResponse;
@@ -18,6 +17,7 @@ import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.RoleRepository;
 import Workflow.example.Workflow.Repository.UserRepository;
 import Workflow.example.Workflow.Service.UserDetailsImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
