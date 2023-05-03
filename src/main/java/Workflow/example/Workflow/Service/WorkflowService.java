@@ -3,11 +3,15 @@ package Workflow.example.Workflow.Service;
 import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.Workflow;
 import Workflow.example.Workflow.Repository.TacheRepository;
+import Workflow.example.Workflow.Repository.UserRepository;
 import Workflow.example.Workflow.Repository.WorkflowRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,6 +24,11 @@ public class WorkflowService {
     private WorkflowRepository workflowRepository;
     @Autowired
     private TacheRepository tacheRepository;
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public ResponseEntity<Object> addWorkflow(Workflow workflow) {
@@ -51,6 +60,13 @@ public class WorkflowService {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+//    public void sendEmail(String to, String subject, String text) {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setTo(to);
+//        message.setSubject(subject);
+//        message.setText(text);
+//        mailSender.send(message);
+//    }
     @Transactional
     public ResponseEntity<Object> updateWorkflow(Long id, Workflow workflow) {
         workflowRepository.findById(id).ifPresentOrElse(
@@ -61,6 +77,12 @@ public class WorkflowService {
                     w.setLastModifiedDate(new Date());
                     w.setDeclencheur(workflow.getDeclencheur());
                     workflowRepository.save(w);
+//                    if (workflow.getEtat().equals("en cours")) {
+//                        String to = "nassim.benhassine@esprit.tn";
+//                        String subject = "Workflow updated to en cours";
+//                        String text = "Le workflow " + workflow.getName() + " est en cours d'exécution !";
+//                        sendEmail(to, subject, text);
+//                    }
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workflow not found !");
                 });
@@ -91,4 +113,5 @@ public class WorkflowService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workflow not found");
         }
     }
+
 }

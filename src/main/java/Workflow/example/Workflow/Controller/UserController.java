@@ -2,9 +2,7 @@ package Workflow.example.Workflow.Controller;
 
 import Workflow.example.Workflow.Converter.UserConverter;
 import Workflow.example.Workflow.DTO.UserDto;
-import Workflow.example.Workflow.DTO.WorkflowDto;
 import Workflow.example.Workflow.Entity.User;
-import Workflow.example.Workflow.Entity.Workflow;
 import Workflow.example.Workflow.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
