@@ -1,5 +1,6 @@
 package Workflow.example.Workflow.Service;
 
+import Workflow.example.Workflow.Entity.Role;
 import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -10,9 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class UserService {
@@ -52,6 +51,22 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public Set<String> getRoleNamesByUserId(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            Set<Role> roles = user.getRoles();
+            Set<String> roleNames = new HashSet<>();
+            for (Role role : roles) {
+                roleNames.add(role.getName().toString());
+            }
+            return roleNames;
+        } else {
+            // handle case where user is not found
+            return null;
+        }
     }
 
 }
