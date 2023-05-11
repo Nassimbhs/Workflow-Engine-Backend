@@ -116,4 +116,7 @@ public class TacheService {
         return tache.getUserList();
     }
 
+    public List<Tache> getTasksByUser(Long userId) {
+        return tacheRepository.findByUserId(userId);
+    }
 }

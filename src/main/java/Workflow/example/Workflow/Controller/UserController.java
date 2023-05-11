@@ -78,4 +78,41 @@ public class UserController {
         }
     }
 
+    @GetMapping("/groups/{groupId}")
+    @Operation(
+            summary = "getUsersByGroupId ",
+            description = "getUsersByGroupId.",
+            tags = { "User" },
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<UserDto> getUsersByGroupId(@PathVariable Long groupId) {
+        return userConverter.entityToDto(userService.getUsersByGroupId(groupId));
+    }
+
+    @GetMapping("/usersByRole")
+    @Operation(
+            summary = "usersByRole ",
+            description = "usersByRole.",
+            tags = { "User" },
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<UserDto> getUsersByRole() {
+        return userConverter.entityToDto(userService.getUsersByRoleUser());
+    }
 }

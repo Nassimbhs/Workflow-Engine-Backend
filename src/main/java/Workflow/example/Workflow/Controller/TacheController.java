@@ -147,7 +147,6 @@ public class TacheController {
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-
     public List<TacheDto> findByWorkflowId(@PathVariable Long id) {
         return tacheConverter.entityToDto(tacheService.findByWorkflowId(id));
     }
@@ -183,4 +182,22 @@ public class TacheController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/users/{userId}/tasks")
+    @Operation(
+            summary = "Find Tache by user id",
+            description = "Find Tache by user id.",
+            tags = {"Tache"},
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = TacheDto.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<TacheDto> getTasksByUser(@PathVariable Long userId) {
+        return tacheConverter.entityToDto(tacheService.getTasksByUser(userId));
+    }
 }

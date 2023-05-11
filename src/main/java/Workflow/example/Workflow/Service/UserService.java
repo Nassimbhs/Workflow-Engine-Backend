@@ -68,5 +68,12 @@ public class UserService {
             return null;
         }
     }
+    public List<User> getUsersByGroupId(Long groupId) {
+        return userRepository.findByGroupId(groupId);
+    }
+
+    public List<User> getUsersByRoleUser() {
+        return userRepository.findUsersByRoleUser();
+    }
 
 }

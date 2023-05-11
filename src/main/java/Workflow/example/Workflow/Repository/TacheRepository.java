@@ -12,7 +12,8 @@ import java.util.List;
 public interface TacheRepository extends JpaRepository<Tache,Long> {
     @Query("SELECT a FROM Tache a WHERE a.workflowTache.id = :id")
     List<Tache> findByWorkflowId(@Param("id") Long id);
-
     Tache findById(long id);
+    @Query("select t from Tache t join t.userList u where u.id = :id")
+    List<Tache> findByUserId(@Param("id") Long id);
 
 }

@@ -46,6 +46,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "tache_id"))
     private List<Tache> taches = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "users")
+    private Set<GroupeUser> groups = new HashSet<>();
+
     public User() {
     }
 
