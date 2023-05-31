@@ -17,12 +17,23 @@ public class Tache implements Serializable {
     private Date creationDate;
     private Date startDate;
     private Date endDate;
+    private String statut;
+    private String triggerType;
+
     @ManyToOne
     private Workflow workflowTache;
 
     @OneToMany(mappedBy = "tacheLien", cascade = CascadeType.ALL)
     private List<LienTache> lienTaches = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "taches")
+    @ManyToMany
+    @JoinTable(
+            name = "user_tache",
+            joinColumns = @JoinColumn(name = "tache_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> userList = new ArrayList<>();
+
+    @OneToOne
+    private Historique historique;
 }

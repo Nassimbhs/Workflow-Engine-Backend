@@ -26,6 +26,8 @@ public class TacheConverter {
         dto.setDescription(tache.getDescription());
         dto.setStartDate(tache.getStartDate());
         dto.setEndDate(tache.getEndDate());
+        dto.setStatut(tache.getStatut());
+        dto.setTriggerType(tache.getTriggerType());
         dto.setLienTacheDtos(lienTacheConverter.entityToDto(tache.getLienTaches()));
         dto.setUserDtoList(userConverter.entityToDto(tache.getUserList()));
         return dto;

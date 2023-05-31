@@ -22,7 +22,7 @@ public class Workflow implements Serializable {
     private Date lastModifiedDate;
     private String etat;
     private String declencheur;
-
+    private String webhookUrl;
     @OneToMany(mappedBy = "workflowTache", cascade = CascadeType.ALL)
     private List<Tache> taches = new ArrayList<>();
 

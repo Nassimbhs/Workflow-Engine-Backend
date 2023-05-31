@@ -1,8 +1,10 @@
 package Workflow.example.Workflow.Service;
 
 import Workflow.example.Workflow.Converter.TacheConverter;
+import Workflow.example.Workflow.Entity.GroupeUser;
 import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.User;
+import Workflow.example.Workflow.Repository.GroupeUserRepository;
 import Workflow.example.Workflow.Repository.TacheRepository;
 import Workflow.example.Workflow.Repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TacheService {
@@ -23,7 +26,7 @@ public class TacheService {
     private UserRepository userRepository;
 
     @Autowired
-    private TacheConverter tacheConverter;
+    private GroupeUserRepository groupeUserRepository;
     @Transactional
     public ResponseEntity<Object> addTache(Tache tache) {
         Long id = tache.getId();
@@ -31,6 +34,7 @@ public class TacheService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Tache with id " + id + " already exists");
         }
         tache.setCreationDate(new Date());
+        tache.setStatut("non traité");
         tacheRepository.save(tache);
         return ResponseEntity.ok()
                 .body(new HashMap<String, Object>() {{
@@ -48,6 +52,8 @@ public class TacheService {
                     a.setCreationDate(tache.getCreationDate());
                     a.setStartDate(tache.getStartDate());
                     a.setEndDate(tache.getEndDate());
+                    a.setStatut(tache.getStatut());
+                    a.setTriggerType(tache.getTriggerType());
                     tacheRepository.save(a);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache not found !");
@@ -84,31 +90,31 @@ public class TacheService {
         return tacheRepository.findByWorkflowId(id);
     }
 
+    @Transactional
     public void assignerTacheAUtilisateurs(Long tacheId, List<Long> userIds) {
-        Tache tache = tacheRepository.findById(tacheId).orElseThrow(() -> new EntityNotFoundException("La tâche avec l'id " + tacheId + " n'existe pas"));
+        Tache task = tacheRepository.findById(tacheId)
+                .orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
 
-        List<User> users = userRepository.findAllById(userIds);
-        if (users.size() != userIds.size()) {
-            throw new EntityNotFoundException("Un ou plusieurs des utilisateurs n'existent pas");
-        }
-        for (User user : users) {
-            if (!user.getTaches().contains(tache)) {
-                user.getTaches().add(tache);
-                userRepository.save(user);
-            }
-        }
+        List<User> existingUsers = task.getUserList(); // Get the existing users assigned to the task
+
+        List<User> usersToAdd = userRepository.findAllByIdIn(userIds);
+
+        usersToAdd.removeAll(existingUsers); // Remove existing users from the new users list
+
+        task.getUserList().addAll(usersToAdd); // Add the new users to the task
+
+        tacheRepository.save(task);
     }
 
+    @Transactional
     public void desassignerTacheAUtilisateur(Long tacheId, Long userId) {
-        Tache tache = tacheRepository.findById(tacheId)
-                .orElseThrow(() -> new EntityNotFoundException("La tâche avec l'id " + tacheId + " n'existe pas"));
+        Tache tache = tacheRepository.findById(tacheId).orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("L'utilisateur avec l'id " + userId + " n'existe pas"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
 
-        if (user.getTaches().remove(tache)) {
-            userRepository.save(user);
-        }
+        tache.getUserList().remove(user);
+
+        tacheRepository.save(tache);
     }
 
     public List<User> getUtilisateursDeTache(long tacheId) {
@@ -119,4 +125,18 @@ public class TacheService {
     public List<Tache> getTasksByUser(Long userId) {
         return tacheRepository.findByUserId(userId);
     }
+
+    public List<Tache> findByUserIdtraite(Long userId) {
+        return tacheRepository.findByUserIdtraite(userId);
+    }
+
+    @Transactional
+    public void assignUsersFromGroupToTask(Long groupId, Long taskId) {
+        GroupeUser groupeUser = groupeUserRepository.findById(groupId).orElseThrow(() -> new IllegalArgumentException("Group not found"));
+        Tache tache = tacheRepository.findById(taskId).orElseThrow(() -> new IllegalArgumentException("Task not found"));
+        Set<User> users = groupeUser.getUsers();
+        tache.getUserList().addAll(users);
+        tacheRepository.save(tache);
+    }
+
 }

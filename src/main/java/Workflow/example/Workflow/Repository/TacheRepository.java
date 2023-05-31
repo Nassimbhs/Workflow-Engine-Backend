@@ -13,7 +13,9 @@ public interface TacheRepository extends JpaRepository<Tache,Long> {
     @Query("SELECT a FROM Tache a WHERE a.workflowTache.id = :id")
     List<Tache> findByWorkflowId(@Param("id") Long id);
     Tache findById(long id);
-    @Query("select t from Tache t join t.userList u where u.id = :id")
+    @Query("SELECT t FROM Tache t JOIN t.userList u WHERE u.id = :id AND t.statut = 'non traité'")
     List<Tache> findByUserId(@Param("id") Long id);
 
+    @Query("SELECT t FROM Tache t JOIN t.userList u WHERE u.id = :id AND t.statut = 'traité'")
+    List<Tache> findByUserIdtraite(@Param("id") Long id);
 }

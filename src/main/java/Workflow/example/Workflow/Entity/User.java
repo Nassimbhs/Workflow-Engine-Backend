@@ -40,10 +40,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_tache",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "tache_id"))
+    @ManyToMany(mappedBy = "userList", cascade = CascadeType.PERSIST)
     private List<Tache> taches = new ArrayList<>();
 
     @ManyToMany(mappedBy = "users")

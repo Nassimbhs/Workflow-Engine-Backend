@@ -22,6 +22,7 @@ public class WorkflowConverter {
         dto.setEtat(workflow.getEtat());
         dto.setCreationDate(workflow.getCreationDate());
         dto.setLastModifiedDate(workflow.getLastModifiedDate());
+        dto.setWebhookUrl(workflow.getWebhookUrl());
         dto.setDeclencheur(workflow.getDeclencheur());
         dto.setTacheDtoList(tacheConverter.entityToDto(workflow.getTaches()));
         return dto;

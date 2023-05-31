@@ -105,11 +105,14 @@ public class AuthController {
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
                         break;
-
-                    default:
+                    case "user":
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
+                        break;
+
+                    default:
+                        throw new RuntimeException("Error: Invalid role specified!");
                 }
             });
         }

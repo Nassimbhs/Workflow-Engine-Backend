@@ -16,6 +16,7 @@ public class WorkflowDto {
     private Date lastModifiedDate;
     private String etat;
     private String declencheur;
+    private String webhookUrl;
 
     private List<TacheDto> tacheDtoList = new ArrayList<TacheDto>();
 }

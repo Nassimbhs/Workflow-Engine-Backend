@@ -17,7 +17,7 @@ public class LienTacheConverter {
         dto.setTarget(lienTache.getTarget());
         dto.setWorkflowId(lienTache.getWorkflowId());
         dto.setTacheSourceName(lienTache.getTacheSourceName());
-        dto.setTacheSourceName(lienTache.getTacheTargetName());
+        dto.setTacheTargetName(lienTache.getTacheTargetName());
         dto.setType(lienTache.getType());
         return dto;
     }

@@ -52,7 +52,10 @@ public class WorkflowService {
         activity2.setCreationDate(new Date());
         activity2.setWorkflowTache(workflow);
         tacheRepository.save(activity2);
-
+        String webhookUrl = generateWebhookUrl(workflow.getId());
+        System.out.println(webhookUrl);
+        workflow.setWebhookUrl(webhookUrl);
+        workflowRepository.save(workflow);
         Map<String, Object> response = new HashMap<>();
         response.put("workflow", workflow);
         response.put("message", "Workflow successfully created!");
@@ -66,6 +69,11 @@ public class WorkflowService {
 //        message.setText(text);
 //        mailSender.send(message);
 //    }
+
+    private String generateWebhookUrl(Long workflowId) {
+        String baseUrl = "https://example.com/webhooks/"; // Votre URL de base pour les webhooks
+        return baseUrl + workflowId.toString();
+    }
     @Transactional
     public ResponseEntity<Object> updateWorkflow(Long id, Workflow workflow) {
         workflowRepository.findById(id).ifPresentOrElse(

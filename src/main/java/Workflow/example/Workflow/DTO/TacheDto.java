@@ -16,6 +16,8 @@ public class TacheDto implements Serializable {
     private Date creationDate;
     private Date startDate;
     private Date endDate;
+    private String statut;
+    private String triggerType;
 
     private List<LienTacheDto> lienTacheDtos = new ArrayList<LienTacheDto>();
     private List<UserDto> userDtoList = new ArrayList<UserDto>();
