@@ -1,5 +1,7 @@
 package Workflow.example.Workflow.Entity;
 
+import Workflow.example.Workflow.Listener.TacheListener;
+import Workflow.example.Workflow.Listener.WorkflowListener;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Data
+@EntityListeners(WorkflowListener.class)
 public class Workflow implements Serializable {
 
     @Id
@@ -23,8 +26,14 @@ public class Workflow implements Serializable {
     private String etat;
     private String declencheur;
     private String webhookUrl;
+    private String jdbcUrl;
+    private String username;
+    private String password;
+    private String sgbd;
+    private String tacheAecouter;
+    private String evenement;
+
     @OneToMany(mappedBy = "workflowTache", cascade = CascadeType.ALL)
     private List<Tache> taches = new ArrayList<>();
-
 
 }

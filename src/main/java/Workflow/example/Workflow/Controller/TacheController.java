@@ -239,5 +239,10 @@ public class TacheController {
     public void assignGroupToTask(@PathVariable Long groupId, @PathVariable Long taskId) {
         tacheService.assignUsersFromGroupToTask(groupId, taskId);
     }
+    @PutMapping("/{tacheId}/conge")
+    public ResponseEntity<String> updateCongeStatut(@PathVariable Long tacheId) {
+        tacheService.updateCongeStatut(tacheId);
+        return new ResponseEntity<>("Congé mis à jour avec succès", HttpStatus.OK);
+    }
 
 }

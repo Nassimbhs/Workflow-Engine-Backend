@@ -1,5 +1,6 @@
 package Workflow.example.Workflow.Entity;
 
+import Workflow.example.Workflow.Listener.TacheListener;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
@@ -7,6 +8,7 @@ import java.util.*;
 
 @Entity
 @Data
+@EntityListeners(TacheListener.class)
 public class Tache implements Serializable {
 
     @Id
@@ -18,8 +20,8 @@ public class Tache implements Serializable {
     private Date startDate;
     private Date endDate;
     private String statut;
-    private String triggerType;
-
+    private String action;
+    private String approbation;
     @ManyToOne
     private Workflow workflowTache;
 
@@ -34,6 +36,10 @@ public class Tache implements Serializable {
     )
     private List<User> userList = new ArrayList<>();
 
-    @OneToOne
-    private Historique historique;
+    @OneToMany(mappedBy = "tacheConge", cascade = CascadeType.ALL)
+    List<Conge> conges = new ArrayList<>();
+
+    @OneToMany(mappedBy = "tacheAtraite", cascade = CascadeType.ALL)
+    private List<TacheAtraiter> tacheAtraiters = new ArrayList<>();
+
 }

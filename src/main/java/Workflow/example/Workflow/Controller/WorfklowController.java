@@ -121,4 +121,23 @@ public class WorfklowController {
         return workflowConverter.entityToDto(workflowService.findWorkflowById(id));
     }
 
+    @GetMapping("/{workflowId}/tables")
+    @Operation(
+            summary = "Find tables",
+            description = "Find tables.",
+            tags = { "Workflow" },
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowDto.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<String> getWorkflowTables(@PathVariable Long workflowId) {
+        return workflowService.getWorkflowTables(workflowId);
+    }
+
 }

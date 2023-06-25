@@ -24,6 +24,12 @@ public class WorkflowConverter {
         dto.setLastModifiedDate(workflow.getLastModifiedDate());
         dto.setWebhookUrl(workflow.getWebhookUrl());
         dto.setDeclencheur(workflow.getDeclencheur());
+        dto.setSgbd(workflow.getSgbd());
+        dto.setJdbcUrl(workflow.getJdbcUrl());
+        dto.setUsername(workflow.getUsername());
+        dto.setPassword(workflow.getPassword());
+        dto.setTacheAecouter(workflow.getTacheAecouter());
+        dto.setEvenement(workflow.getEvenement());
         dto.setTacheDtoList(tacheConverter.entityToDto(workflow.getTaches()));
         return dto;
     }

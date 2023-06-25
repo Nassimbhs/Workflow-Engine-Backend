@@ -3,6 +3,7 @@ package Workflow.example.Workflow.Controller;
 import Workflow.example.Workflow.Converter.UserConverter;
 import Workflow.example.Workflow.DTO.UserDto;
 import Workflow.example.Workflow.Entity.Role;
+import Workflow.example.Workflow.Entity.TacheAtraiter;
 import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -115,4 +116,5 @@ public class UserController {
     public List<UserDto> getUsersByRole() {
         return userConverter.entityToDto(userService.getUsersByRoleUser());
     }
+
 }

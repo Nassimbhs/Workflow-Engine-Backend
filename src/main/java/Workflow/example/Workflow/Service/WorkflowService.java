@@ -3,16 +3,14 @@ package Workflow.example.Workflow.Service;
 import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.Workflow;
 import Workflow.example.Workflow.Repository.TacheRepository;
-import Workflow.example.Workflow.Repository.UserRepository;
 import Workflow.example.Workflow.Repository.WorkflowRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.webjars.NotFoundException;
 
 import java.util.*;
 
@@ -24,10 +22,7 @@ public class WorkflowService {
     @Autowired
     private TacheRepository tacheRepository;
     @Autowired
-    private JavaMailSender mailSender;
-
-    @Autowired
-    private UserRepository userRepository;
+    private TableService tableService;
 
     @Transactional
     public ResponseEntity<Object> addWorkflow(Workflow workflow) {
@@ -53,7 +48,6 @@ public class WorkflowService {
         activity2.setWorkflowTache(workflow);
         tacheRepository.save(activity2);
         String webhookUrl = generateWebhookUrl(workflow.getId());
-        System.out.println(webhookUrl);
         workflow.setWebhookUrl(webhookUrl);
         workflowRepository.save(workflow);
         Map<String, Object> response = new HashMap<>();
@@ -62,18 +56,11 @@ public class WorkflowService {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    public void sendEmail(String to, String subject, String text) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setTo(to);
-//        message.setSubject(subject);
-//        message.setText(text);
-//        mailSender.send(message);
-//    }
-
     private String generateWebhookUrl(Long workflowId) {
-        String baseUrl = "https://example.com/webhooks/"; // Votre URL de base pour les webhooks
+        String baseUrl = "https://example.com/webhooks/";
         return baseUrl + workflowId.toString();
     }
+
     @Transactional
     public ResponseEntity<Object> updateWorkflow(Long id, Workflow workflow) {
         workflowRepository.findById(id).ifPresentOrElse(
@@ -83,13 +70,13 @@ public class WorkflowService {
                     w.setEtat(workflow.getEtat());
                     w.setLastModifiedDate(new Date());
                     w.setDeclencheur(workflow.getDeclencheur());
+                    w.setSgbd(workflow.getSgbd());
+                    w.setJdbcUrl(workflow.getJdbcUrl());
+                    w.setUsername(workflow.getUsername());
+                    w.setPassword(workflow.getPassword());
+                    w.setTacheAecouter(workflow.getTacheAecouter());
+                    w.setEvenement(workflow.getEvenement());
                     workflowRepository.save(w);
-//                    if (workflow.getEtat().equals("en cours")) {
-//                        String to = "nassim.benhassine@esprit.tn";
-//                        String subject = "Workflow updated to en cours";
-//                        String text = "Le workflow " + workflow.getName() + " est en cours d'exécution !";
-//                        sendEmail(to, subject, text);
-//                    }
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workflow not found !");
                 });
@@ -119,6 +106,12 @@ public class WorkflowService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workflow not found");
         }
+    }
+
+    public List<String> getWorkflowTables(Long workflowId) {
+        Workflow workflow = workflowRepository.findById(workflowId)
+                .orElseThrow(() -> new NotFoundException("Workflow not found with id: " + workflowId));
+        return tableService.getTables(workflow.getJdbcUrl(), workflow.getUsername(), workflow.getPassword(),workflow.getSgbd());
     }
 
 }
