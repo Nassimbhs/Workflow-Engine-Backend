@@ -65,6 +65,21 @@ public class TacheService {
                     a.setAction(tache.getAction());
                     a.setApprobation(tache.getApprobation());
                     tacheRepository.save(a);
+
+                    // Mettre à jour les TacheAtraiter associées à la tâche
+                    List<TacheAtraiter> tacheAtraiters = a.getTacheAtraiters();
+                    for (TacheAtraiter tacheAtraiter : tacheAtraiters) {
+                        tacheAtraiter.setName(a.getName());
+                        tacheAtraiter.setDescription(a.getDescription());
+                        tacheAtraiter.setCreationDate(a.getCreationDate());
+                        tacheAtraiter.setStartDate(a.getStartDate());
+                        tacheAtraiter.setEndDate(a.getEndDate());
+                        tacheAtraiter.setStatut(a.getStatut());
+                        tacheAtraiter.setAction(a.getAction());
+                        tacheAtraiter.setApprobation(a.getApprobation());
+                    }
+                    tacheAtraiteRepository.saveAll(tacheAtraiters);
+
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache not found !");
                 });
@@ -112,6 +127,20 @@ public class TacheService {
 
         tacheRepository.save(task);
 
+        // Ajouter une ligne dans la table TacheAtraiter pour chaque utilisateur ajouté
+        for (User user : usersToAdd) {
+            TacheAtraiter tacheAtraiter = new TacheAtraiter();
+            tacheAtraiter.setName(task.getName());
+            tacheAtraiter.setDescription(task.getDescription());
+            tacheAtraiter.setCreationDate(new Date());
+            // Définir les autres propriétés de TacheAtraiter en fonction de la tâche assignée
+            tacheAtraiter.setTacheAtraite(task);
+            tacheAtraiter.setResponsable(user.getId());
+            tacheAtraiter.setStatut("non traité");
+            // Enregistrer la tâche à traiter dans la table TacheAtraiter
+            tacheAtraiteRepository.save(tacheAtraiter);
+        }
+
         tacheListener.beforeAssignation(tacheId, userIds);
     }
 
@@ -120,13 +149,10 @@ public class TacheService {
         Tache tache = tacheRepository.findById(tacheId).orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
         tache.getUserList().remove(user);
-        tache.getUserList().remove(user);
         tacheRepository.save(tache);
-
         List<TacheAtraiter> tacheAtraiters = tacheAtraiteRepository.findByTacheAtraiteAndResponsable(tache, userId);
         tacheAtraiteRepository.deleteAll(tacheAtraiters);
         tacheRepository.save(tache);
-
     }
 
     public List<User> getUtilisateursDeTache(long tacheId) {

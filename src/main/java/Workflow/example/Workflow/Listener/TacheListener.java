@@ -1,8 +1,5 @@
 package Workflow.example.Workflow.Listener;
 
-
-import Workflow.example.Workflow.Entity.User;
-import Workflow.example.Workflow.Entity.Workflow;
 import Workflow.example.Workflow.Repository.WorkflowRepository;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +7,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import Workflow.example.Workflow.Entity.Tache;
-
-import java.util.Date;
 import java.util.List;
 
 @Component

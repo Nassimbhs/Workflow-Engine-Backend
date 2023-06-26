@@ -17,6 +17,7 @@ public class TacheAtraiterConverter {
         dto.setDescription(tacheAtraiter.getDescription());
         dto.setEndDate(tacheAtraiter.getEndDate());
         dto.setStatut(tacheAtraiter.getStatut());
+        dto.setAction(tacheAtraiter.getAction());
         dto.setApprobation(tacheAtraiter.getApprobation());
         dto.setResponsable(tacheAtraiter.getResponsable());
         return dto;

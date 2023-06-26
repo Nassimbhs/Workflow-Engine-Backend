@@ -14,5 +14,6 @@ import java.util.List;
 public interface TacheAtraiteRepository extends JpaRepository<TacheAtraiter,Long> {
     List<TacheAtraiter> findByTacheAtraiteAndResponsable(Tache tache, Long responsable);
     boolean existsByTacheAtraiteAndResponsable(Tache tache, Long responsable);
+    List<TacheAtraiter> findByResponsable(Long responsableId);
 
 }
