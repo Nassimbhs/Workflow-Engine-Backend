@@ -17,5 +17,6 @@ public class TacheAtraiterDto implements Serializable {
     private String action;
     private String approbation;
     private Long responsable;
+    private String emailResponsable;
 
 }

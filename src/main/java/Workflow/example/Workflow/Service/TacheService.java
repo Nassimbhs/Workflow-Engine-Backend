@@ -137,6 +137,7 @@ public class TacheService {
             tacheAtraiter.setTacheAtraite(task);
             tacheAtraiter.setResponsable(user.getId());
             tacheAtraiter.setStatut("non traité");
+            tacheAtraiter.setEmailResponsable(user.getEmail());
             // Enregistrer la tâche à traiter dans la table TacheAtraiter
             tacheAtraiteRepository.save(tacheAtraiter);
         }

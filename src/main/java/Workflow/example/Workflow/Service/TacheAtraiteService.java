@@ -1,6 +1,5 @@
 package Workflow.example.Workflow.Service;
 
-import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.TacheAtraiter;
 import Workflow.example.Workflow.Repository.TacheAtraiteRepository;
 import jakarta.transaction.Transactional;
@@ -51,6 +50,10 @@ public class TacheAtraiteService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "TacheAtraiter not found");
         }
+    }
+
+    public List<TacheAtraiter> getTachesTraiteesParResponsable(Long responsableId) {
+        return tacheAtraiteRepository.getTachesTraiteesParResponsable(responsableId);
     }
 
 }

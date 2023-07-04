@@ -1,7 +1,6 @@
 package Workflow.example.Workflow.Service;
 
 import Workflow.example.Workflow.Entity.Role;
-import Workflow.example.Workflow.Entity.TacheAtraiter;
 import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -44,6 +43,7 @@ public class UserService {
     public User findUserById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
+            Optional<User> responsable = userRepository.findById(id);
             return userOptional.get();
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");

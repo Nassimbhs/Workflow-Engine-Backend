@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Set;
@@ -115,6 +116,15 @@ public class UserController {
     )
     public List<UserDto> getUsersByRole() {
         return userConverter.entityToDto(userService.getUsersByRoleUser());
+    }
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") Long id) {
+        try {
+            return userService.findUserById(id);
+        } catch (ResponseStatusException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found", ex);
+        }
     }
 
 }

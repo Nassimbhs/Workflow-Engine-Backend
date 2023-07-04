@@ -106,4 +106,23 @@ public class TacheAtraiterController {
         return tacheAtraiterConverter.entityToDto(tacheAtraiteService.findtacheById(id));
     }
 
+    @GetMapping("/traitees/{responsableId}")
+    @Operation(
+            summary = "Find TacheAtraiter traité",
+            description = "Find Tache traité",
+            tags = {"TacheAtraiter"},
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = TacheAtraiterDto.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<TacheAtraiterDto> getTachesNonTraiteesParResponsable(@PathVariable Long responsableId) {
+        return tacheAtraiterConverter.entityToDto( tacheAtraiteService.getTachesTraiteesParResponsable(responsableId));
+    }
+
 }
