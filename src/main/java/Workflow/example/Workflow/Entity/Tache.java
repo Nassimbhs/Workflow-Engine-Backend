@@ -36,9 +36,6 @@ public class Tache implements Serializable {
     )
     private List<User> userList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "tacheConge", cascade = CascadeType.ALL)
-    List<Conge> conges = new ArrayList<>();
-
     @OneToMany(mappedBy = "tacheAtraite", cascade = CascadeType.ALL)
     private List<TacheAtraiter> tacheAtraiters = new ArrayList<>();
 

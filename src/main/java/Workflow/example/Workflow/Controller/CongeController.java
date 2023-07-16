@@ -3,7 +3,6 @@ package Workflow.example.Workflow.Controller;
 import Workflow.example.Workflow.Converter.CongeConverter;
 import Workflow.example.Workflow.DTO.CongeDto;
 import Workflow.example.Workflow.Entity.Conge;
-import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Service.CongeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -47,51 +46,18 @@ public class CongeController {
         return congeConverter.entityToDto(congeService.getAllConge());
     }
 
-    @PostMapping("/conges/taches/{tacheId}")
-    public ResponseEntity<String> addAndAssignCongeToTask(@RequestBody Conge conge, @PathVariable Long tacheId) {
-        congeService.addAndAssignCongeToTask(conge, tacheId);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Conge added and assigned to Tache successfully");
-    }
-
-    @GetMapping("/byTask/{tacheId}/{userId}")
-    @Operation(
-            summary = "Get conge by task",
-            description = "Get conge by task.",
-            tags = { "Conge" },
-            responses = {
-                    @ApiResponse(
-                            description = "Success",
-                            responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = CongeDto.class))
-                    ),
-                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
-                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+    @PostMapping("/add-with-assignment/{tacheAtraiterId}")
+    public ResponseEntity<String> addCongeWithAssignmentToTacheAtraiter(@RequestBody Conge conge, @PathVariable Long tacheAtraiterId) {
+        try {
+            boolean congeAdded = congeService.addCongeWithAssignmentToTacheAtraiter(conge, tacheAtraiterId);
+            if (congeAdded) {
+                return ResponseEntity.status(HttpStatus.CREATED).body("Conge added and assigned to Tache successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("TacheAtraiter not found");
             }
-    )
-    public ResponseEntity<CongeDto> getCongeByTacheAndUser(@PathVariable Long tacheId, @PathVariable Long userId) {
-        CongeDto congeDto = congeConverter.entityToDto(congeService.getCongeByTacheAndUser(tacheId, userId));
-        if (congeDto == null) {
-            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred: " + e.getMessage());
         }
-        return ResponseEntity.ok(congeDto);
-    }
-    @PutMapping("/{tacheId}/approbation")
-    @Operation(
-            summary = "Accept task",
-            description = "Update and accept task.",
-            tags = { "Conge" },
-            responses = {
-                    @ApiResponse(
-                            description = "Success",
-                            responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Conge.class))
-                    ),
-                    @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
-                    @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
-            }
-    )
-    public void updateCongeApprovalByTacheId(@PathVariable Long tacheId) {
-        congeService.updateCongeApprovalByTacheId(tacheId);
     }
 
 }

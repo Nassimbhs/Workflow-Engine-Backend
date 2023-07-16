@@ -16,8 +16,12 @@ public class TableService {
     }
 
     public List<String> getTables(String jdbcUrl, String username, String password, String sgbd) {
-
         String query;
+
+        if (sgbd == null) {
+            sgbd = "mysql";
+        }
+
         if (sgbd.equalsIgnoreCase("mysql")) {
             query = "SHOW TABLES";
         } else if (sgbd.equalsIgnoreCase("postgres")) {
@@ -31,5 +35,7 @@ public class TableService {
         List<String> tables = jdbcTemplate.queryForList(query, String.class);
         return tables;
     }
+
+
 
 }

@@ -26,15 +26,12 @@ public class LienTacheService {
 
     @Transactional
     public ResponseEntity<Object> addLink(LienTache lienTache) {
-        // Get the activity corresponding to the given ID
         Optional<Tache> tache = tacheRepository.findById(lienTache.getId());
         if (!tache.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "activity with id " + lienTache.getId() + " not found");
         }
-        // Set the activity property of the link to the corresponding activity
         lienTache.setTacheLien(tache.get());
 
-        // Save the link to the repository
         lienTacheRepository.save(lienTache);
         LienTacheDto lienTacheDTO = new LienTacheDto();
         lienTacheDTO.setId(lienTache.getId());
@@ -43,7 +40,6 @@ public class LienTacheService {
         lienTacheDTO.setWorkflowId(lienTache.getWorkflowId());
         lienTacheDTO.setTacheSourceName(lienTache.getTacheSourceName());
         lienTacheDTO.setTacheTargetName(lienTache.getTacheTargetName());
-        // Return a JSON response
         return ResponseEntity.ok()
                 .body(new HashMap<String, Object>() {{
                     put("LienActivite", lienTacheDTO);

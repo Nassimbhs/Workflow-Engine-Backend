@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -66,7 +65,6 @@ public class TacheService {
                     a.setApprobation(tache.getApprobation());
                     tacheRepository.save(a);
 
-                    // Mettre à jour les TacheAtraiter associées à la tâche
                     List<TacheAtraiter> tacheAtraiters = a.getTacheAtraiters();
                     for (TacheAtraiter tacheAtraiter : tacheAtraiters) {
                         tacheAtraiter.setName(a.getName());
@@ -117,28 +115,33 @@ public class TacheService {
     }
 
     @Transactional
-    public void assignerTacheAUtilisateurs(Long tacheId, List<Long> userIds) {
+    public void assignerTacheAUtilisateurs(Long tacheId, List<Long> userIds, Long workflowId) {
         Tache task = tacheRepository.findById(tacheId)
                 .orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
-        List<User> existingUsers = task.getUserList();
-        List<User> usersToAdd = userRepository.findAllByIdIn(userIds);
-        usersToAdd.removeAll(existingUsers);
-        task.getUserList().addAll(usersToAdd);
 
+        for (Long userId : userIds) {
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+            if (user.getTaches().size() > 0) {
+                throw new RuntimeException("L'utilisateur est déjà assigné à une tâche");
+            }
+        }
+
+        List<User> usersToAdd = userRepository.findAllByIdIn(userIds);
+        task.getUserList().addAll(usersToAdd);
         tacheRepository.save(task);
 
-        // Ajouter une ligne dans la table TacheAtraiter pour chaque utilisateur ajouté
         for (User user : usersToAdd) {
             TacheAtraiter tacheAtraiter = new TacheAtraiter();
             tacheAtraiter.setName(task.getName());
             tacheAtraiter.setDescription(task.getDescription());
             tacheAtraiter.setCreationDate(new Date());
-            // Définir les autres propriétés de TacheAtraiter en fonction de la tâche assignée
+            tacheAtraiter.setAction(task.getAction());
             tacheAtraiter.setTacheAtraite(task);
             tacheAtraiter.setResponsable(user.getId());
-            tacheAtraiter.setStatut("non traité");
             tacheAtraiter.setEmailResponsable(user.getEmail());
-            // Enregistrer la tâche à traiter dans la table TacheAtraiter
+            tacheAtraiter.setStatut("non traité");
+            tacheAtraiter.setWorkflowId(workflowId);
             tacheAtraiteRepository.save(tacheAtraiter);
         }
 
@@ -147,13 +150,20 @@ public class TacheService {
 
     @Transactional
     public void desassignerTacheAUtilisateur(Long tacheId, Long userId) {
-        Tache tache = tacheRepository.findById(tacheId).orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        Tache tache = tacheRepository.findById(tacheId)
+                .orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+
         tache.getUserList().remove(user);
+
         tacheRepository.save(tache);
+
         List<TacheAtraiter> tacheAtraiters = tacheAtraiteRepository.findByTacheAtraiteAndResponsable(tache, userId);
-        tacheAtraiteRepository.deleteAll(tacheAtraiters);
-        tacheRepository.save(tache);
+        for (TacheAtraiter tacheAtraiter : tacheAtraiters) {
+            tacheAtraiter.getCvs().forEach(cv -> cv.getTachesAtraiter().remove(tacheAtraiter));
+            tacheAtraiteRepository.delete(tacheAtraiter);
+        }
     }
 
     public List<User> getUtilisateursDeTache(long tacheId) {
@@ -176,35 +186,6 @@ public class TacheService {
         Set<User> users = groupeUser.getUsers();
         tache.getUserList().addAll(users);
         tacheRepository.save(tache);
-    }
-
-    @Transactional
-    public void updateCongeStatut(Long tacheId) {
-        Tache tache = tacheRepository.findById(tacheId).orElse(null);
-        if (tache != null) {
-            Conge conge = tache.getConges().get(0);
-            if (conge != null) {
-                conge.setStatut("accepter");
-
-                // Créer une nouvelle instance de TacheAtraiter
-                TacheAtraiter tacheAtraiter = new TacheAtraiter();
-                tacheAtraiter.setName(tache.getName());
-                tacheAtraiter.setDescription(tache.getDescription());
-                tacheAtraiter.setCreationDate(new Date());
-                tacheAtraiter.setStartDate(tache.getStartDate());
-                tacheAtraiter.setEndDate(tache.getEndDate());
-                tacheAtraiter.setStatut("traité");
-                tacheAtraiter.setAction(tache.getAction());
-                tacheAtraiter.setApprobation(tache.getApprobation());
-                tacheAtraiter.setResponsable(tache.getUserList().get(0).getId());
-
-                tacheAtraiter.setTacheAtraite(tache);
-                // Sauvegarder la nouvelle instance de TacheAtraiter
-                tacheAtraiteRepository.save(tacheAtraiter);
-
-                tacheRepository.save(tache);
-            }
-        }
     }
 
 }

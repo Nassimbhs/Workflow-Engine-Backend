@@ -2,26 +2,21 @@ package Workflow.example.Workflow.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
-public class Conge implements Serializable {
-
+public class Formation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nomFormation;
+    private String etablissement;
     private Date dateDeb;
     private Date dateFin;
-    private String type;
-    private String statut;
-    private String commentaire;
-    private String responsable;
-
+    private String description;
     @ManyToOne
-    private TacheAtraiter tacheAtraiter;
-
+    private Cv cv;
 }

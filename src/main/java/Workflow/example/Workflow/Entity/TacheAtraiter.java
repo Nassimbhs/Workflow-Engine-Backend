@@ -1,11 +1,11 @@
 package Workflow.example.Workflow.Entity;
 
 import Workflow.example.Workflow.Listener.TacheAtraiterListener;
-import Workflow.example.Workflow.Listener.TacheListener;
 import jakarta.persistence.*;
 import lombok.Data;
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,7 +24,14 @@ public class TacheAtraiter {
     private String approbation;
     private Long responsable;
     private String emailResponsable;
+    private Long workflowId;
     @ManyToOne
     private Tache tacheAtraite;
+
+    @OneToMany(mappedBy = "tacheAtraiter", cascade = CascadeType.ALL)
+    List<Conge> conges = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "tachesAtraiter")
+    private List<Cv> cvs = new ArrayList<>();
 
 }

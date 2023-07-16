@@ -152,7 +152,7 @@ public class TacheController {
         return tacheConverter.entityToDto(tacheService.findByWorkflowId(id));
     }
 
-    @PostMapping("{tacheId}/assigner-utilisateurs")
+    @PostMapping("{tacheId}/{workflowId}/assigner-utilisateurs")
     @Operation(
             summary = "Find Tache by workflow id",
             description = "Find Tache by workflow id.",
@@ -167,8 +167,8 @@ public class TacheController {
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<?> assignerTacheAUtilisateurs(@PathVariable("tacheId") Long tacheId, @RequestBody List<Long> userIds) {
-        tacheService.assignerTacheAUtilisateurs(tacheId, userIds);
+    public ResponseEntity<?> assignerTacheAUtilisateurs(@PathVariable("tacheId") Long tacheId,@PathVariable("workflowId") Long workflowId, @RequestBody List<Long> userIds) {
+        tacheService.assignerTacheAUtilisateurs(tacheId,userIds,workflowId);
         return ResponseEntity.ok().build();
     }
 
@@ -238,11 +238,6 @@ public class TacheController {
     @PostMapping("/tasks/{taskId}/assign/group/{groupId}")
     public void assignGroupToTask(@PathVariable Long groupId, @PathVariable Long taskId) {
         tacheService.assignUsersFromGroupToTask(groupId, taskId);
-    }
-    @PutMapping("/{tacheId}/conge")
-    public ResponseEntity<String> updateCongeStatut(@PathVariable Long tacheId) {
-        tacheService.updateCongeStatut(tacheId);
-        return new ResponseEntity<>("Congé mis à jour avec succès", HttpStatus.OK);
     }
 
 }
