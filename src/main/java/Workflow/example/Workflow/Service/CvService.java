@@ -4,7 +4,6 @@ import Workflow.example.Workflow.Entity.Cv;
 import Workflow.example.Workflow.Entity.TacheAtraiter;
 import Workflow.example.Workflow.Repository.CvRepository;
 import Workflow.example.Workflow.Repository.TacheAtraiteRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,18 +30,24 @@ public class CvService {
         return cvRepository.findById(id);
     }
 
-    public void assignCVToTacheAtraiter(Long cvId, Long tacheAtraiterId) {
-        Cv cv = cvRepository.findById(cvId).orElseThrow(() -> new EntityNotFoundException("CV not found"));
-        TacheAtraiter tacheAtraiter = tacheAtraiteRepository.findById(tacheAtraiterId).orElseThrow(() -> new EntityNotFoundException("TacheAtraiter not found"));
+    public Cv assignCvToTacheAtraiter(Long cvId, Long tacheAtraiterId) {
+        Cv cv = cvRepository.findById(cvId).orElse(null);
+        TacheAtraiter tacheAtraiter = tacheAtraiteRepository.findById(tacheAtraiterId).orElse(null);
 
-        cv.getTachesAtraiter().add(tacheAtraiter);
-        tacheAtraiter.getCvs().add(cv);
-
-        cvRepository.save(cv);
-        tacheAtraiteRepository.save(tacheAtraiter);
+        if (cv != null && tacheAtraiter != null) {
+            cv.getTachesAtraiter().add(tacheAtraiter);
+            tacheAtraiter.getCvs().add(cv);
+            cvRepository.save(cv);
+            tacheAtraiteRepository.save(tacheAtraiter);
+        }
+        return cv;
     }
 
     public List<Cv> getAllCvs() {
         return cvRepository.findAll();
     }
+    public List<Cv> getCvByTacheAtraiterId(Long tacheAtraiterId) {
+        return cvRepository.findByTachesAtraiterId(tacheAtraiterId);
+    }
+
 }

@@ -2,10 +2,7 @@ package Workflow.example.Workflow.Controller;
 
 
 import Workflow.example.Workflow.Converter.TacheAtraiterConverter;
-import Workflow.example.Workflow.Converter.TacheConverter;
 import Workflow.example.Workflow.DTO.TacheAtraiterDto;
-import Workflow.example.Workflow.DTO.TacheDto;
-import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.TacheAtraiter;
 import Workflow.example.Workflow.Service.TacheAtraiteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,6 +64,10 @@ public class TacheAtraiterController {
     )
     public ResponseEntity<Object> updateTache(@PathVariable Long id, @RequestBody TacheAtraiter tacheAtraiter) {
         return tacheAtraiteService.marquerTacheCommeTraite(id, tacheAtraiter);
+    }
+    @PutMapping("/rejeter/{id}")
+    public ResponseEntity<Object> RejeterTache(@PathVariable Long id, @RequestBody TacheAtraiter tacheAtraiter) {
+        return tacheAtraiteService.RejeterTache(id, tacheAtraiter);
     }
 
     @GetMapping("/allTacheAtraiter/")

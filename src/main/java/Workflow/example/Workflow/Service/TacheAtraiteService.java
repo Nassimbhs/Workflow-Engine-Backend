@@ -28,6 +28,7 @@ public class TacheAtraiteService {
         tacheAtraiteRepository.findById(id).ifPresentOrElse(
                 a -> {
                     a.setStatut("traité");
+                    a.setApprobation("Accepter");
                     tacheAtraiteRepository.save(a);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found !");
@@ -39,6 +40,25 @@ public class TacheAtraiteService {
                     put("message", "tacheAtraiter successfully updated!");
                 }});
     }
+
+    @Transactional
+    public ResponseEntity<Object> RejeterTache(Long id, TacheAtraiter tacheAtraiter) {
+        tacheAtraiteRepository.findById(id).ifPresentOrElse(
+                a -> {
+                    a.setStatut("traité");
+                    a.setApprobation("Rejeter");
+                    tacheAtraiteRepository.save(a);
+                }, () -> {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found !");
+                });
+
+        return ResponseEntity.ok()
+                .body(new HashMap<String, Object>() {{
+                    put("tacheAtraiter", tacheAtraiter);
+                    put("message", "tacheAtraiter successfully updated!");
+                }});
+    }
+
     public List<TacheAtraiter> getAlltachesAtraiter() {
         return tacheAtraiteRepository.findAll();
     }

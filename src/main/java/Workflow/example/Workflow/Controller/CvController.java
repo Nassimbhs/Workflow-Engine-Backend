@@ -40,17 +40,32 @@ public class CvController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @PostMapping("/{cvId}/assign-tache/{tacheAtraiterId}")
-    public ResponseEntity<String> assignCvToTacheAtraiter(
-            @PathVariable("cvId") Long cvId,
-            @PathVariable("tacheAtraiterId") Long tacheAtraiterId) {
-        cvService.assignCVToTacheAtraiter(cvId, tacheAtraiterId);
-        return new ResponseEntity<>("CV assigned to TacheAtraiter successfully", HttpStatus.OK);
+    @PostMapping("/{cvId}/assign/{tacheAtraiterId}")
+    public ResponseEntity<CvDto> assignCvToTacheAtraiter(
+            @PathVariable Long cvId,
+            @PathVariable Long tacheAtraiterId
+    ) {
+        Cv cv = cvService.assignCvToTacheAtraiter(cvId, tacheAtraiterId);
+        CvDto cvDto = cvConverter.entityToDto(cv);
+        if (cvDto != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(cvDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Return 404 if cv or tacheAtraiter is not found
+        }
     }
 
     @GetMapping("/getAllCvs")
     public List<CvDto> getAllCvs() {
         return cvConverter.entityToDto(cvService.getAllCvs());
     }
+    @GetMapping("/tacheAtraiter/{id}")
+    public ResponseEntity<List<CvDto>> getCvByTacheAtraiterId(@PathVariable("id") Long tacheAtraiterId) {
+        List<CvDto> cvList = cvConverter.entityToDto(cvService.getCvByTacheAtraiterId(tacheAtraiterId));
+        if (!cvList.isEmpty()) {
+            return ResponseEntity.ok(cvList);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 }
