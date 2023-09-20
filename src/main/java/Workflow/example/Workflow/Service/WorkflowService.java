@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.webjars.NotFoundException;
-
 import java.util.*;
 
 @Service
@@ -47,18 +46,11 @@ public class WorkflowService {
         activity2.setCreationDate(new Date());
         activity2.setWorkflowTache(workflow);
         tacheRepository.save(activity2);
-        String webhookUrl = generateWebhookUrl(workflow.getId());
-        workflow.setWebhookUrl(webhookUrl);
         workflowRepository.save(workflow);
         Map<String, Object> response = new HashMap<>();
         response.put("workflow", workflow);
         response.put("message", "Workflow successfully created!");
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    private String generateWebhookUrl(Long workflowId) {
-        String baseUrl = "https://example.com/webhooks/";
-        return baseUrl + workflowId.toString();
     }
 
     @Transactional
@@ -76,6 +68,7 @@ public class WorkflowService {
                     w.setPassword(workflow.getPassword());
                     w.setTacheAecouter(workflow.getTacheAecouter());
                     w.setEvenement(workflow.getEvenement());
+                    w.setWebhookUrl(workflow.getWebhookUrl());
                     workflowRepository.save(w);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workflow not found !");

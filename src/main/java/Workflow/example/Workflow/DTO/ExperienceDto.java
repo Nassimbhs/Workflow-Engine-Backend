@@ -1,14 +1,14 @@
 package Workflow.example.Workflow.DTO;
 
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
-public class FormationDto {
+public class ExperienceDto {
     private Long id;
-    private String nomFormation;
-    private String etablissement;
+    private String poste;
+    private String employeur;
     private Date dateDeb;
     private Date dateFin;
+    private String description;
 }

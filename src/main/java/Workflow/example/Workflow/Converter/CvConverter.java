@@ -14,8 +14,17 @@ public class CvConverter {
     private FormationConverter formationConverter;
     @Autowired
     private CompetenceConverter competenceConverter;
+    @Autowired
+    private InteretConverter interetConverter;
+    @Autowired
+    private LangueConverter langueConverter;
+    @Autowired
+    private ExperienceConverter experienceConverter;
 
     public CvDto entityToDto(Cv cv){
+        if (cv == null) {
+            return null;
+        }
         CvDto dto = new CvDto();
         dto.setId(cv.getId());
         dto.setEmail(cv.getEmail());
@@ -27,6 +36,10 @@ public class CvConverter {
         dto.setTitreProfil(cv.getTitreProfil());
         dto.setFormationDtos(formationConverter.entityToDto(cv.getFormations()));
         dto.setCompetenceDtos(competenceConverter.entityToDto(cv.getCompetences()));
+        dto.setInteretDtos(interetConverter.entityToDto(cv.getInterets()));
+        dto.setLangueDtos(langueConverter.entityToDto(cv.getLangues()));
+        dto.setExperienceDtos(experienceConverter.entityToDto(cv.getExperiences()));
+
         return dto;
     }
     public List<CvDto> entityToDto(List<Cv> cvs)

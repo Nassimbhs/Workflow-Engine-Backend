@@ -34,4 +34,12 @@ public class TacheAtraiter {
     @ManyToMany(mappedBy = "tachesAtraiter")
     private List<Cv> cvs = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "tache_atraiter_jsondata",
+            joinColumns = @JoinColumn(name = "tache_atraiter_id"),
+            inverseJoinColumns = @JoinColumn(name = "jsondata_id")
+    )
+    private List<JsonData> jsonDatas = new ArrayList<>();
+
 }

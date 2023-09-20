@@ -1,8 +1,6 @@
 package Workflow.example.Workflow.Listener;
 
-import Workflow.example.Workflow.Entity.Tache;
 import Workflow.example.Workflow.Entity.TacheAtraiter;
-import Workflow.example.Workflow.Entity.Workflow;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostRemove;
 import jakarta.persistence.PostUpdate;
@@ -27,32 +25,23 @@ public class TacheAtraiterListener {
 
     @PostPersist
     public void afterPersist(TacheAtraiter tacheAtraiter) {
-        Tache tache = tacheAtraiter.getTacheAtraite();
-        Workflow workflow = tache.getWorkflowTache();
-        if (workflow != null && "en cours".equalsIgnoreCase(workflow.getEtat())) {
             System.out.println(tacheAtraiter.getEmailResponsable());
 //            sendEmail(tacheAtraiter.getEmailResponsable(),
 //                    "Nouvelle tâche à traiter",
 //                    "Tache appelée : " + "'" + tacheAtraiter.getName() + "'" + " a été ajouté.");
-        }
     }
 
     @PostUpdate
     public void afterUpdate(TacheAtraiter tacheAtraiter) {
-        Tache tache = tacheAtraiter.getTacheAtraite();
-        Workflow workflow = tache.getWorkflowTache();
-        if (workflow != null && "en cours".equalsIgnoreCase(workflow.getEtat())) {
-            System.out.println("nom de la tache modifier : " + tacheAtraiter.getName());
+        if (tacheAtraiter.getAction() != null && tacheAtraiter.getAction().equals("Accepter")) {
+            System.out.println("Nom de la tache modifié : " + tacheAtraiter.getName());
+            System.out.println("Email responsable : " + tacheAtraiter.getEmailResponsable());
         }
     }
 
     @PostRemove
     public void afterRemove(TacheAtraiter tacheAtraiter) {
-        Tache tache = tacheAtraiter.getTacheAtraite();
-        Workflow workflow = tache.getWorkflowTache();
-        if (workflow != null && "en cours".equalsIgnoreCase(workflow.getEtat())) {
-            System.out.println("nom de la tache supprimer : " + tacheAtraiter.getName());
-        }
+        System.out.println("nom de la tache supprimer : " + tacheAtraiter.getName());
     }
 
 }

@@ -18,5 +18,8 @@ public class CvDto {
     private String ville;
     private List<FormationDto> formationDtos = new ArrayList<FormationDto>();
     private List<CompetenceDto> competenceDtos = new ArrayList<CompetenceDto>();
+    private List<LangueDto> langueDtos = new ArrayList<LangueDto>();
+    private List<InteretDto> interetDtos = new ArrayList<InteretDto>();
+    private List<ExperienceDto> experienceDtos = new ArrayList<ExperienceDto>();
 
 }

@@ -65,7 +65,6 @@ public class UserService {
             }
             return roleNames;
         } else {
-            // handle case where user is not found
             return null;
         }
     }

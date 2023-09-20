@@ -50,7 +50,7 @@ public class CvController {
         if (cvDto != null) {
             return ResponseEntity.status(HttpStatus.OK).body(cvDto);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Return 404 if cv or tacheAtraiter is not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -68,4 +68,14 @@ public class CvController {
         }
     }
 
+    @GetMapping("/{tacheAtraiterId}")
+    public ResponseEntity<CvDto> getCvWithCompetencesAndFormations(
+            @PathVariable Long tacheAtraiterId) {
+
+        CvDto cvDto = cvConverter.entityToDto(cvService.getCvWithCompetencesAndFormations(tacheAtraiterId));
+        if (cvDto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cvDto);
+    }
 }

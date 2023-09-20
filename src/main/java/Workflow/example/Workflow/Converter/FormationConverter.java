@@ -11,7 +11,6 @@ public class FormationConverter {
     public FormationDto entityToDto(Formation formation){
         FormationDto dto = new FormationDto();
         dto.setId(formation.getId());
-        dto.setDescription(formation.getDescription());
         dto.setNomFormation(formation.getNomFormation());
         dto.setEtablissement(formation.getEtablissement());
         dto.setDateDeb(formation.getDateDeb());

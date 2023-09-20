@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -122,7 +120,7 @@ public class TacheService {
         for (Long userId : userIds) {
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
-            if (user.getTaches().size() > 0) {
+            if (!user.getTaches().isEmpty()) {
                 throw new RuntimeException("L'utilisateur est déjà assigné à une tâche");
             }
         }

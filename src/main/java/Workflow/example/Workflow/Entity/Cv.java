@@ -1,14 +1,15 @@
 package Workflow.example.Workflow.Entity;
 
+import Workflow.example.Workflow.Listener.CvListener;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
+@EntityListeners(CvListener.class)
 public class Cv implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,15 @@ public class Cv implements Serializable {
 
     @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
     private List<Formation> formations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
+    private List<Langue> langues = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
+    private List<Experience> experiences = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
+    private List<Interet> interets = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
