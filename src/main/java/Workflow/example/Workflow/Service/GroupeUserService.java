@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -32,11 +33,12 @@ public class GroupeUserService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "group with id " + id + " already exists");
         }
         groupeUserRepository.save(groupeUser);
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("GroupeUser", groupeUser);
-                    put("message", "group successfully created!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("GroupeUser", groupeUser);
+        responseBody.put("message", "group successfully created!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
 
     @Transactional
