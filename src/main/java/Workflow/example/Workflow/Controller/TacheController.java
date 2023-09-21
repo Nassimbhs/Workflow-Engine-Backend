@@ -5,7 +5,6 @@ import Workflow.example.Workflow.Converter.UserConverter;
 import Workflow.example.Workflow.DTO.TacheDto;
 import Workflow.example.Workflow.DTO.UserDto;
 import Workflow.example.Workflow.Entity.Tache;
-import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.TacheRepository;
 import Workflow.example.Workflow.Service.TacheService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,14 +12,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 
 @RestController

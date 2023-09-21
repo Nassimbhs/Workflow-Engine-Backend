@@ -4,9 +4,10 @@ import Workflow.example.Workflow.Entity.JsonData;
 import Workflow.example.Workflow.Entity.TacheAtraiter;
 import Workflow.example.Workflow.Repository.JsonDataRepository;
 import Workflow.example.Workflow.Repository.TacheAtraiteRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service

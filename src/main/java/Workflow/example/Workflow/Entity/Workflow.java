@@ -1,8 +1,7 @@
 package Workflow.example.Workflow.Entity;
 
-import Workflow.example.Workflow.Listener.TacheListener;
 import Workflow.example.Workflow.Listener.WorkflowListener;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;

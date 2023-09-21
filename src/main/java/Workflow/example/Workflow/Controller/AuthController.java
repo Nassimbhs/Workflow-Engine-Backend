@@ -17,7 +17,6 @@ import Workflow.example.Workflow.Entity.User;
 import Workflow.example.Workflow.Repository.RoleRepository;
 import Workflow.example.Workflow.Repository.UserRepository;
 import Workflow.example.Workflow.Service.UserDetailsImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +29,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")

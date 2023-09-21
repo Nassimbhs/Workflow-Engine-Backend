@@ -1,8 +1,9 @@
 package Workflow.example.Workflow.Entity;
 
 import Workflow.example.Workflow.Listener.CvListener;
-import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

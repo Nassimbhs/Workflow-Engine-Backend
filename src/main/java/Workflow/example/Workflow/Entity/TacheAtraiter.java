@@ -1,7 +1,7 @@
 package Workflow.example.Workflow.Entity;
 
 import Workflow.example.Workflow.Listener.TacheAtraiterListener;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;

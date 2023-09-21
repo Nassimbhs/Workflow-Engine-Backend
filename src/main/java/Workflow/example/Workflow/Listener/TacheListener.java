@@ -1,7 +1,7 @@
 package Workflow.example.Workflow.Listener;
 
 import Workflow.example.Workflow.Repository.WorkflowRepository;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

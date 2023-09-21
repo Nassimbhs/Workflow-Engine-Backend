@@ -1,9 +1,9 @@
 package Workflow.example.Workflow.Listener;
 
 import Workflow.example.Workflow.Entity.Workflow;
-import jakarta.persistence.PostPersist;
-import jakarta.persistence.PostRemove;
-import jakarta.persistence.PostUpdate;
+import javax.persistence.PostPersist;
+import javax.persistence.PostRemove;
+import javax.persistence.PostUpdate;
 import org.springframework.stereotype.Component;
 
 @Component

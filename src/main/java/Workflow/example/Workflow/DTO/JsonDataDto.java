@@ -1,7 +1,8 @@
 package Workflow.example.Workflow.DTO;
 
-import jakarta.persistence.Column;
 import lombok.Data;
+
+import javax.persistence.Column;
 
 @Data
 public class JsonDataDto {
