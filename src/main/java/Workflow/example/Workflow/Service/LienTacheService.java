@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -40,11 +41,12 @@ public class LienTacheService {
         lienTacheDTO.setWorkflowId(lienTache.getWorkflowId());
         lienTacheDTO.setTacheSourceName(lienTache.getTacheSourceName());
         lienTacheDTO.setTacheTargetName(lienTache.getTacheTargetName());
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("LienActivite", lienTacheDTO);
-                    put("message", "Link successfully created!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("LienActivite", lienTacheDTO);
+        responseBody.put("message", "Link successfully created!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
     @Transactional
     public ResponseEntity<Object> updateLink(Long id, LienTache lienTache) {
@@ -57,11 +59,12 @@ public class LienTacheService {
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Link not found !");
                 });
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("lien", lienTache);
-                    put("message", "Link successfully updated!");
-                }});    }
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("LienActivite", lienTache);
+        responseBody.put("message", "Link successfully updated !");
+
+        return ResponseEntity.ok().body(responseBody);
+    }
 
     @Transactional
     public void deleteLinkById(Long id) {

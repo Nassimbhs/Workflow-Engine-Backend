@@ -74,11 +74,12 @@ public class WorkflowService {
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workflow not found !");
                 });
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("workflow", workflow);
-                    put("message", "Workflow successfully updated!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("workflow", workflow);
+        responseBody.put("message", "Workflow successfully updated!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
 
     @Transactional

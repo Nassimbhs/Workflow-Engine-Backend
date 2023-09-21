@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -34,11 +35,12 @@ public class TacheAtraiteService {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found !");
                 });
 
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("tacheAtraiter", tacheAtraiter);
-                    put("message", "tacheAtraiter successfully updated!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("tacheAtraiter", tacheAtraiter);
+        responseBody.put("message", "tacheAtraiter successfully updated!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
 
     @Transactional
@@ -52,11 +54,12 @@ public class TacheAtraiteService {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found !");
                 });
 
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("tacheAtraiter", tacheAtraiter);
-                    put("message", "tacheAtraiter successfully updated!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("tacheAtraiter", tacheAtraiter);
+        responseBody.put("message", "tacheAtraiter successfully updated!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
 
     public List<TacheAtraiter> getAlltachesAtraiter() {

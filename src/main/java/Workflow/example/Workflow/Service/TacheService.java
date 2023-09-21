@@ -43,11 +43,12 @@ public class TacheService {
 
         tacheRepository.save(tache);
 
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("Tache", tache);
-                    put("message", "Tache successfully created!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("Tache", tache);
+        responseBody.put("message", "Tache successfully created!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
 
     @Transactional
@@ -81,11 +82,12 @@ public class TacheService {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache not found !");
                 });
 
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("tache", tache);
-                    put("message", "Tache successfully updated!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("Tache", tache);
+        responseBody.put("message", "Tache successfully updated!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
 
     @Transactional

@@ -51,11 +51,11 @@ public class GroupeUserService {
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "group not found !");
                 });
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("GroupeUser", groupeUser);
-                    put("message", "Group successfully updated!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("GroupeUser", groupeUser);
+        responseBody.put("message", "group successfully updated !");
+
+        return ResponseEntity.ok().body(responseBody);
     }
 
     @Transactional

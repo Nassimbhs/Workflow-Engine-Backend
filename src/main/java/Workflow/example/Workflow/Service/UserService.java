@@ -33,11 +33,12 @@ public class UserService {
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found !");
                 });
-        return ResponseEntity.ok()
-                .body(new HashMap<String, Object>() {{
-                    put("user", user);
-                    put("message", "user successfully updated!");
-                }});
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("user", user);
+        responseBody.put("message", "user successfully updated!");
+
+        return ResponseEntity.ok().body(responseBody);
+
     }
 
     public User findUserById(Long id) {
