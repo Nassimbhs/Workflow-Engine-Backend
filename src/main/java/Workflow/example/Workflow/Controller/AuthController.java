@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import workflow.example.workflow.configuration.JwtUtils;
+import workflow.example.workflow.configuration.security.JwtUtils;
 import workflow.example.workflow.configuration.payload.JwtResponse;
 import workflow.example.workflow.configuration.payload.LoginRequest;
 import workflow.example.workflow.configuration.payload.MessageResponse;

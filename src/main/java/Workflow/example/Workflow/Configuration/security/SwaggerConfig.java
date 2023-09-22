@@ -1,4 +1,4 @@
-package workflow.example.workflow.configuration;
+package workflow.example.workflow.configuration.security;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

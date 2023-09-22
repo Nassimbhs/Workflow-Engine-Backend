@@ -1,4 +1,4 @@
-package workflow.example.workflow.configuration;
+package workflow.example.workflow.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
