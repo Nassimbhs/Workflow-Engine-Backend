@@ -1,6 +1,5 @@
-package Workflow.example.Workflow.Listener;
+package workflow.example.workflow.listener;
 
-import Workflow.example.Workflow.Entity.TacheAtraiter;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.entity.TacheAtraiter;
 
 @Component
 public class TacheAtraiterListener {

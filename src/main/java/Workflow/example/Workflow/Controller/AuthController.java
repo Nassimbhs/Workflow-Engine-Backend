@@ -1,22 +1,9 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-
-import Workflow.example.Workflow.Configuration.JwtUtils;
-import Workflow.example.Workflow.Configuration.Payload.JwtResponse;
-import Workflow.example.Workflow.Configuration.Payload.LoginRequest;
-import Workflow.example.Workflow.Configuration.Payload.MessageResponse;
-import Workflow.example.Workflow.Configuration.Payload.SignupRequest;
-import Workflow.example.Workflow.Entity.ERole;
-import Workflow.example.Workflow.Entity.Role;
-import Workflow.example.Workflow.Entity.User;
-import Workflow.example.Workflow.Repository.RoleRepository;
-import Workflow.example.Workflow.Repository.UserRepository;
-import Workflow.example.Workflow.Service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import workflow.example.workflow.configuration.JwtUtils;
+import workflow.example.workflow.configuration.payload.JwtResponse;
+import workflow.example.workflow.configuration.payload.LoginRequest;
+import workflow.example.workflow.configuration.payload.MessageResponse;
+import workflow.example.workflow.configuration.payload.SignupRequest;
+import workflow.example.workflow.entity.ERole;
+import workflow.example.workflow.entity.Role;
+import workflow.example.workflow.entity.User;
+import workflow.example.workflow.repository.RoleRepository;
+import workflow.example.workflow.repository.UserRepository;
+import workflow.example.workflow.service.UserDetailsImpl;
 
 import javax.validation.Valid;
 

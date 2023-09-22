@@ -1,13 +1,13 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
-import Workflow.example.Workflow.Entity.User;
-import Workflow.example.Workflow.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import workflow.example.workflow.entity.User;
+import workflow.example.workflow.repository.UserRepository;
 
 
 @Service

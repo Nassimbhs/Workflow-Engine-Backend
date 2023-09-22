@@ -1,9 +1,10 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
-import Workflow.example.Workflow.Entity.Competence;
-import Workflow.example.Workflow.Repository.CompetenceRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import workflow.example.workflow.entity.Competence;
+import workflow.example.workflow.repository.CompetenceRepository;
 
 import java.util.List;
 

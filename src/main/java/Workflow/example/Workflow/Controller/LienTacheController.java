@@ -1,9 +1,5 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.LienTacheConverter;
-import Workflow.example.Workflow.DTO.LienTacheDto;
-import Workflow.example.Workflow.Entity.LienTache;
-import Workflow.example.Workflow.Service.LienTacheService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,6 +8,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import workflow.example.workflow.converter.LienTacheConverter;
+import workflow.example.workflow.dto.LienTacheDto;
+import workflow.example.workflow.entity.LienTache;
+import workflow.example.workflow.service.LienTacheService;
 
 import java.util.List;
 

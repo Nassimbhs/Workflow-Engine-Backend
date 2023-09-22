@@ -1,12 +1,5 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.TacheConverter;
-import Workflow.example.Workflow.Converter.UserConverter;
-import Workflow.example.Workflow.DTO.TacheDto;
-import Workflow.example.Workflow.DTO.UserDto;
-import Workflow.example.Workflow.Entity.Tache;
-import Workflow.example.Workflow.Repository.TacheRepository;
-import Workflow.example.Workflow.Service.TacheService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,9 +8,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import workflow.example.workflow.converter.TacheConverter;
+import workflow.example.workflow.converter.UserConverter;
+import workflow.example.workflow.dto.TacheDto;
+import workflow.example.workflow.dto.UserDto;
+import workflow.example.workflow.entity.Tache;
+import workflow.example.workflow.repository.TacheRepository;
+import workflow.example.workflow.service.TacheService;
 
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/api/v1/Tache")

@@ -1,8 +1,9 @@
-package Workflow.example.Workflow.Entity;
+package workflow.example.workflow.entity;
 
-import Workflow.example.Workflow.Listener.TacheAtraiterListener;
 import javax.persistence.*;
 import lombok.Data;
+import workflow.example.workflow.listener.TacheAtraiterListener;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

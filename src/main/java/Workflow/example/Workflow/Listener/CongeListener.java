@@ -1,10 +1,10 @@
-package Workflow.example.Workflow.Listener;
+package workflow.example.workflow.listener;
 
-import Workflow.example.Workflow.Entity.Conge;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.entity.Conge;
 
 @Component
 public class CongeListener {

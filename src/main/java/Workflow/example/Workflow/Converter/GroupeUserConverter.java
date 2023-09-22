@@ -1,8 +1,8 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.GroupeUserDto;
-import Workflow.example.Workflow.Entity.GroupeUser;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.GroupeUserDto;
+import workflow.example.workflow.entity.GroupeUser;
 
 import java.util.List;
 import java.util.stream.Collectors;

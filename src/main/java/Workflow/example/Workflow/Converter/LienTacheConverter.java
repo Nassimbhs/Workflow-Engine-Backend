@@ -1,8 +1,8 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.LienTacheDto;
-import Workflow.example.Workflow.Entity.LienTache;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.LienTacheDto;
+import workflow.example.workflow.entity.LienTache;
 
 import java.util.List;
 import java.util.stream.Collectors;

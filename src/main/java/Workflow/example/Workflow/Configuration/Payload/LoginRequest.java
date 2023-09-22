@@ -1,4 +1,4 @@
-package Workflow.example.Workflow.Configuration.Payload;
+package workflow.example.workflow.configuration.payload;
 
 
 import javax.validation.constraints.NotBlank;

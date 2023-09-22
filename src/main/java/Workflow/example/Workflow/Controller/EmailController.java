@@ -1,11 +1,11 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Entity.EmailRequest;
-import Workflow.example.Workflow.Service.EmailService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
+import workflow.example.workflow.entity.EmailRequest;
+import workflow.example.workflow.service.EmailService;
 
 @RestController
 @RequestMapping("/api/email")

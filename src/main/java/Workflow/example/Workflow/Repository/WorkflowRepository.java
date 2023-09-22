@@ -1,7 +1,8 @@
-package Workflow.example.Workflow.Repository;
+package workflow.example.workflow.repository;
 
-import Workflow.example.Workflow.Entity.Workflow;
 import org.springframework.data.jpa.repository.JpaRepository;
+import workflow.example.workflow.entity.Workflow;
+
 public interface WorkflowRepository extends JpaRepository<Workflow,Long> {
 
 }

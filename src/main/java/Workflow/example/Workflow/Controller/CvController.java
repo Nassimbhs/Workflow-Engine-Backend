@@ -1,14 +1,14 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.CvConverter;
-import Workflow.example.Workflow.DTO.CvDto;
-import Workflow.example.Workflow.Entity.Cv;
-import Workflow.example.Workflow.Service.CvService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import workflow.example.workflow.converter.CvConverter;
+import workflow.example.workflow.dto.CvDto;
+import workflow.example.workflow.entity.Cv;
+import workflow.example.workflow.service.CvService;
 
 import java.util.List;
 

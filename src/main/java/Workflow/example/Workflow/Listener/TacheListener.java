@@ -1,12 +1,13 @@
-package Workflow.example.Workflow.Listener;
+package workflow.example.workflow.listener;
 
-import Workflow.example.Workflow.Repository.WorkflowRepository;
 import javax.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
-import Workflow.example.Workflow.Entity.Tache;
+import workflow.example.workflow.entity.Tache;
+import workflow.example.workflow.repository.WorkflowRepository;
+
 import java.util.List;
 
 @Component

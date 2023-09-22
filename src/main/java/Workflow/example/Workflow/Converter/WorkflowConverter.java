@@ -1,9 +1,9 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.WorkflowDto;
-import Workflow.example.Workflow.Entity.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.WorkflowDto;
+import workflow.example.workflow.entity.Workflow;
 
 import java.util.List;
 import java.util.stream.Collectors;

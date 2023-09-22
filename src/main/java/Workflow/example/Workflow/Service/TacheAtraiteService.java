@@ -1,12 +1,12 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
-import Workflow.example.Workflow.Entity.TacheAtraiter;
-import Workflow.example.Workflow.Repository.TacheAtraiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import workflow.example.workflow.entity.TacheAtraiter;
+import workflow.example.workflow.repository.TacheAtraiteRepository;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;

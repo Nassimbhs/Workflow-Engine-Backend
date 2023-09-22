@@ -1,17 +1,18 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.WorkflowConverter;
-import Workflow.example.Workflow.DTO.WorkflowDto;
-import Workflow.example.Workflow.Entity.Workflow;
-import Workflow.example.Workflow.Service.WorkflowService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import workflow.example.workflow.converter.WorkflowConverter;
+import workflow.example.workflow.dto.WorkflowDto;
+import workflow.example.workflow.entity.Workflow;
+import workflow.example.workflow.service.WorkflowService;
 
 import java.util.List;
 
@@ -136,7 +137,7 @@ public class WorfklowController {
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
-    public List<String> getWorkflowTables(@PathVariable Long workflowId) {
+    public List<String> getWorkflowTables(@PathVariable Long workflowId) throws NotFoundException {
         return workflowService.getWorkflowTables(workflowId);
     }
 

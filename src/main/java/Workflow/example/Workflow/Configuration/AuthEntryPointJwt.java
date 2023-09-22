@@ -1,4 +1,4 @@
-package Workflow.example.Workflow.Configuration;
+package workflow.example.workflow.configuration;
 
 import java.io.IOException;
 

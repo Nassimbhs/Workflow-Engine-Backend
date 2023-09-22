@@ -1,11 +1,9 @@
-package Workflow.example.Workflow.Entity;
+package workflow.example.workflow.entity;
 
 import javax.persistence.*;
 import lombok.Data;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity

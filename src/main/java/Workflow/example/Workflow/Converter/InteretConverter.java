@@ -1,8 +1,9 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.InteretDto;
-import Workflow.example.Workflow.Entity.Interet;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.InteretDto;
+import workflow.example.workflow.entity.Interet;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

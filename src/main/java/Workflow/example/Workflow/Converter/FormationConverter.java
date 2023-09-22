@@ -1,8 +1,9 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.FormationDto;
-import Workflow.example.Workflow.Entity.Formation;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.FormationDto;
+import workflow.example.workflow.entity.Formation;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

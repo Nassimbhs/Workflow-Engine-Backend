@@ -1,4 +1,4 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

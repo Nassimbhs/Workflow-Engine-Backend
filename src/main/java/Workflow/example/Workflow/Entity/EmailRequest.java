@@ -1,4 +1,4 @@
-package Workflow.example.Workflow.Entity;
+package workflow.example.workflow.entity;
 
 import lombok.Data;
 

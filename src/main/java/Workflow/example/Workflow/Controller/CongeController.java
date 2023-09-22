@@ -1,9 +1,5 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.CongeConverter;
-import Workflow.example.Workflow.DTO.CongeDto;
-import Workflow.example.Workflow.Entity.Conge;
-import Workflow.example.Workflow.Service.CongeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import workflow.example.workflow.converter.CongeConverter;
+import workflow.example.workflow.dto.CongeDto;
+import workflow.example.workflow.entity.Conge;
+import workflow.example.workflow.service.CongeService;
 
 import java.util.List;
 

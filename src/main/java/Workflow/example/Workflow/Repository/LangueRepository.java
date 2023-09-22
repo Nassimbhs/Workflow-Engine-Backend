@@ -1,8 +1,8 @@
-package Workflow.example.Workflow.Repository;
+package workflow.example.workflow.repository;
 
-import Workflow.example.Workflow.Entity.Langue;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import workflow.example.workflow.entity.Langue;
 
 @Repository
 public interface LangueRepository extends JpaRepository<Langue,Long> {

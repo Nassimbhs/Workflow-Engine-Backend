@@ -1,15 +1,15 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
-import Workflow.example.Workflow.Entity.Tache;
-import Workflow.example.Workflow.Entity.Workflow;
-import Workflow.example.Workflow.Repository.TacheRepository;
-import Workflow.example.Workflow.Repository.WorkflowRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import org.webjars.NotFoundException;
+import workflow.example.workflow.entity.Tache;
+import workflow.example.workflow.entity.Workflow;
+import workflow.example.workflow.repository.TacheRepository;
+import workflow.example.workflow.repository.WorkflowRepository;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -103,7 +103,7 @@ public class WorkflowService {
         }
     }
 
-    public List<String> getWorkflowTables(Long workflowId) {
+    public List<String> getWorkflowTables(Long workflowId) throws NotFoundException {
         Workflow workflow = workflowRepository.findById(workflowId)
                 .orElseThrow(() -> new NotFoundException("Workflow not found with id: " + workflowId));
         return tableService.getTables(workflow.getJdbcUrl(), workflow.getUsername(), workflow.getPassword(),workflow.getSgbd());

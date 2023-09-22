@@ -1,8 +1,8 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.CongeDto;
-import Workflow.example.Workflow.Entity.Conge;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.CongeDto;
+import workflow.example.workflow.entity.Conge;
 
 import java.util.List;
 import java.util.stream.Collectors;

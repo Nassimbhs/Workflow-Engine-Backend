@@ -1,16 +1,19 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
-import Workflow.example.Workflow.Entity.*;
-import Workflow.example.Workflow.Listener.TacheListener;
-import Workflow.example.Workflow.Repository.GroupeUserRepository;
-import Workflow.example.Workflow.Repository.TacheAtraiteRepository;
-import Workflow.example.Workflow.Repository.TacheRepository;
-import Workflow.example.Workflow.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import workflow.example.workflow.entity.GroupeUser;
+import workflow.example.workflow.entity.Tache;
+import workflow.example.workflow.entity.TacheAtraiter;
+import workflow.example.workflow.entity.User;
+import workflow.example.workflow.listener.TacheListener;
+import workflow.example.workflow.repository.GroupeUserRepository;
+import workflow.example.workflow.repository.TacheAtraiteRepository;
+import workflow.example.workflow.repository.TacheRepository;
+import workflow.example.workflow.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.*;

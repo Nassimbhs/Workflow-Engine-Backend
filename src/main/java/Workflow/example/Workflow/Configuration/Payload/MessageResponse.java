@@ -1,4 +1,4 @@
-package Workflow.example.Workflow.Configuration.Payload;
+package workflow.example.workflow.configuration.payload;
 
 public class MessageResponse {
     private String message;

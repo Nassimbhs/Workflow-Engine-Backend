@@ -1,9 +1,10 @@
-package Workflow.example.Workflow.Repository;
+package workflow.example.workflow.repository;
 
-import Workflow.example.Workflow.Entity.JsonData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import workflow.example.workflow.entity.JsonData;
+
 import java.util.List;
 
 @Repository

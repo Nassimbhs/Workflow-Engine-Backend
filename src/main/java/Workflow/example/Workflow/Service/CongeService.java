@@ -1,10 +1,11 @@
-package Workflow.example.Workflow.Service;
-import Workflow.example.Workflow.Entity.Conge;
-import Workflow.example.Workflow.Entity.TacheAtraiter;
-import Workflow.example.Workflow.Repository.CongeRepository;
-import Workflow.example.Workflow.Repository.TacheAtraiteRepository;
+package workflow.example.workflow.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import workflow.example.workflow.entity.Conge;
+import workflow.example.workflow.entity.TacheAtraiter;
+import workflow.example.workflow.repository.CongeRepository;
+import workflow.example.workflow.repository.TacheAtraiteRepository;
 import java.util.*;
 
 @Service

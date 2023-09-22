@@ -1,11 +1,11 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
-import Workflow.example.Workflow.Entity.JsonData;
-import Workflow.example.Workflow.Entity.TacheAtraiter;
-import Workflow.example.Workflow.Repository.JsonDataRepository;
-import Workflow.example.Workflow.Repository.TacheAtraiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import workflow.example.workflow.entity.JsonData;
+import workflow.example.workflow.entity.TacheAtraiter;
+import workflow.example.workflow.repository.JsonDataRepository;
+import workflow.example.workflow.repository.TacheAtraiteRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;

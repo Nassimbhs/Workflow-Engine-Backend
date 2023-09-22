@@ -1,8 +1,9 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.JsonDataDto;
-import Workflow.example.Workflow.Entity.JsonData;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.JsonDataDto;
+import workflow.example.workflow.entity.JsonData;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

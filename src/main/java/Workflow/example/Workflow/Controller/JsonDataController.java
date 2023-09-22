@@ -1,13 +1,14 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.JsonDataConverter;
-import Workflow.example.Workflow.DTO.JsonDataDto;
-import Workflow.example.Workflow.Entity.JsonData;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import Workflow.example.Workflow.Service.JsonDataService;
+import workflow.example.workflow.converter.JsonDataConverter;
+import workflow.example.workflow.dto.JsonDataDto;
+import workflow.example.workflow.entity.JsonData;
+import workflow.example.workflow.service.JsonDataService;
+
 import java.util.List;
 
 @RestController

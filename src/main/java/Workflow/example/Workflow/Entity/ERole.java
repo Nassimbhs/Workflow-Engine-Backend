@@ -1,4 +1,4 @@
-package Workflow.example.Workflow.Entity;
+package workflow.example.workflow.entity;
 
 public enum ERole {
     ROLE_USER,

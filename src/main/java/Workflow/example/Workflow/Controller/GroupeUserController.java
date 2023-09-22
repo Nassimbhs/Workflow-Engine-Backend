@@ -1,10 +1,5 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.GroupeUserConverter;
-import Workflow.example.Workflow.DTO.GroupeUserDto;
-import Workflow.example.Workflow.DTO.TacheDto;
-import Workflow.example.Workflow.Entity.GroupeUser;
-import Workflow.example.Workflow.Service.GroupeUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,6 +8,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import workflow.example.workflow.converter.GroupeUserConverter;
+import workflow.example.workflow.dto.GroupeUserDto;
+import workflow.example.workflow.entity.GroupeUser;
+import workflow.example.workflow.service.GroupeUserService;
 
 import java.util.List;
 

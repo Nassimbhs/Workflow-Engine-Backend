@@ -1,11 +1,5 @@
-package Workflow.example.Workflow.Controller;
+package workflow.example.workflow.controller;
 
-import Workflow.example.Workflow.Converter.UserConverter;
-import Workflow.example.Workflow.DTO.UserDto;
-import Workflow.example.Workflow.Entity.Role;
-import Workflow.example.Workflow.Entity.TacheAtraiter;
-import Workflow.example.Workflow.Entity.User;
-import Workflow.example.Workflow.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,6 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import workflow.example.workflow.converter.UserConverter;
+import workflow.example.workflow.dto.UserDto;
+import workflow.example.workflow.entity.User;
+import workflow.example.workflow.service.UserService;
 
 import java.util.List;
 import java.util.Set;

@@ -1,8 +1,8 @@
-package Workflow.example.Workflow.Converter;
+package workflow.example.workflow.converter;
 
-import Workflow.example.Workflow.DTO.TacheAtraiterDto;
-import Workflow.example.Workflow.Entity.TacheAtraiter;
 import org.springframework.stereotype.Component;
+import workflow.example.workflow.dto.TacheAtraiterDto;
+import workflow.example.workflow.entity.TacheAtraiter;
 
 import java.util.List;
 import java.util.stream.Collectors;

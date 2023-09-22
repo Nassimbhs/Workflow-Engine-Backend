@@ -1,14 +1,9 @@
-package Workflow.example.Workflow.Service;
+package workflow.example.workflow.service;
 
-import Workflow.example.Workflow.Entity.Role;
-import Workflow.example.Workflow.Entity.User;
-import Workflow.example.Workflow.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
+import workflow.example.workflow.entity.Role;
+import workflow.example.workflow.repository.RoleRepository;
 
 @Service
 public class RoleService {
