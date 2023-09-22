@@ -1,8 +1,7 @@
 package workflow.example.workflow.configuration.payload;
 
 
-import javax.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.NotBlank;
 public class LoginRequest {
     @NotBlank
     private String username;
